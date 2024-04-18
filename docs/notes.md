@@ -1,6 +1,7 @@
 general:
     
     candidates,votes,results directory namen naar 1 candidate,vote,result (of misschien duidelijker via candidacy, voting)
+    Maak een utils package en maak een aparte methode voor het splitten en krijgen van alle rows in een file want nu bijna precies hetzelfde code 2 keer in beide controllers
 
 votes directory:
 
