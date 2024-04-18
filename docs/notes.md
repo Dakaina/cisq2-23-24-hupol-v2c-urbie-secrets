@@ -69,20 +69,20 @@ Candidacy.java:
 
 candidates.java:
 
-    Verander naar CandidateController voor duidelijkheid.
-    Verander variabele afkorting repo naar candidateRepository voor duidelijkheid.
+    Verander naar CandidateController voor duidelijkheid
+    Verander variabele afkorting repo naar candidateRepository voor duidelijkheid
     Verander de naam van de methode Importcandidatelist naar importCandidateList
-    Verander variabele f naar file.
-    Voeg spaties toe bij de eerste if f != null.
+    Verander variabele f naar file
+    Voeg spaties toe bij de eerste if f != null
     Vereenvoudig de eerste if  door !(condities)
-    Verander variabele candies naar candidates.
-    Verander variabele c naar fileStringified.
-    Verander variabele rs naar rows.
-    Verander variabele rnum naar row.
-    Combineer if op regel 32 en 33.
-    Verander variabele cols naar columns.
+    Verander variabele candies naar candidates
+    Verander variabele c naar fileStringified
+    Verander variabele rs naar rows
+    Verander variabele rnum naar row
+    Combineer if op regel 32 en 33
+    Verander variabele cols naar columns
     Verwijder trash opmerkingen die niet veel info bieden
-    Throw OK_REQUEST als alles goed gaat.
+    Throw OK_REQUEST als alles goed gaat
     Continues eruit
     Maak service klasse want op het moment communiceert controller direct met domain en data wat niet mag
 
