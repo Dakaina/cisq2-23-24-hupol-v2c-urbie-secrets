@@ -13,7 +13,7 @@ VRepo.java:
 
 VotingRight.java:
 
-    Verander naar VoteID voor duidelijkheid
+    Verander naar VoteId voor duidelijkheid
     Verander candidateId van String naar long voor consistentie met andere ids
     Maak equals methode overzichtelijker via if/elif/else
 
@@ -63,7 +63,7 @@ Repo.java:
 
 Candidacy.java:
 
-    Verander naar CandidateID voor duidelijkheid
+    Verander naar CandidateId voor duidelijkheid
     Verander in equals methode o naar object
     Maak equals methode overzichtelijker via if/elif/else
 
@@ -86,3 +86,7 @@ candidates.java:
     Continues eruit
     Maak service klasse want op het moment communiceert controller direct met domain en data wat niet mag
 
+Bronnen:
+
+    ChatGPT (spelfouten gefixt en beter geordend want orgineel in notepad geschreven)
+    https://www.baeldung.com/jpa-composite-primary-keys (hoe werken composite primary keys in spring want dat wist ik nog niet)
