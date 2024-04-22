@@ -33,11 +33,11 @@ public class Candidate {
         return this.electionId == id;
     }
 
-    public String getCandidateId() {
+    public String getId() {
         return this.candidateId;
     }
 
-    public CandidateId getCandidacy() {
+    public CandidateId getCandidateId() {
         return new CandidateId(electionId, candidateId);
     }
 
@@ -50,10 +50,16 @@ public class Candidate {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Candidate candidate)) return false;
-        return Objects.equals(name, candidate.name) && Objects.equals(faction, candidate.faction);
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        else if (!(object instanceof Candidate candidate)) {
+            return false;
+        }
+        else {
+            return Objects.equals(name, candidate.name) && Objects.equals(faction, candidate.faction);
+        }
     }
 
     @Override

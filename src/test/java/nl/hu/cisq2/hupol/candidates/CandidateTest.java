@@ -14,7 +14,7 @@ public class CandidateTest {
         var electionId = 123L;
         var candidate = new Candidate(candidateId, electionId, "name", "faction");
 
-        var candidacy = candidate.getCandidacy();
+        var candidacy = candidate.getCandidateId();
         var expected = new CandidateId(electionId, candidateId);
 
         assertEquals(expected, candidacy);

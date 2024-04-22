@@ -36,7 +36,7 @@ public class ResultService {
                     continue;
                 }
 
-                if (vote.isForCandidate(candidate.getCandidateId())) {
+                if (vote.isForCandidate(candidate.getId())) {
                     this.countVoteForCandidate(candidate, results);
                 }
             }
@@ -49,7 +49,7 @@ public class ResultService {
         boolean found = false;
 
         for (ResultPerCandidate result : results) {
-            if (result.isForCandidate(candidate.getCandidateId())) {
+            if (result.isForCandidate(candidate.getId())) {
                 result.countVote();
                 found = true;
                 break;
@@ -57,7 +57,7 @@ public class ResultService {
         }
 
         if (!found) {
-            results.add(new ResultPerCandidate(candidate.getCandidateId(), candidate.getName(), candidate.getFaction(), 1L));
+            results.add(new ResultPerCandidate(candidate.getId(), candidate.getName(), candidate.getFaction(), 1L));
         }
     }
 }
