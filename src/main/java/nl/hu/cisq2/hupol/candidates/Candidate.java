@@ -7,7 +7,7 @@ import jakarta.persistence.IdClass;
 import java.util.Objects;
 
 @Entity
-@IdClass(Candidacy.class)
+@IdClass(CandidateId.class)
 public class Candidate {
     @Id
     private String candidateId;
@@ -37,8 +37,8 @@ public class Candidate {
         return this.candidateId;
     }
 
-    public Candidacy getCandidacy() {
-        return new Candidacy(electionId, candidateId);
+    public CandidateId getCandidacy() {
+        return new CandidateId(electionId, candidateId);
     }
 
     public String getName() {
