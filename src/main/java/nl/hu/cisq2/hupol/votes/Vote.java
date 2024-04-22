@@ -16,7 +16,7 @@ public class Vote {
     @Id
     private long voterId;
     @Id
-    private long candidateId;
+    private String candidateId;
 
     private LocalDate castDate;
 
@@ -25,7 +25,7 @@ public class Vote {
     public Vote() {
     }
 
-    public Vote(long electionId, long voterId, long candidateId, LocalDate castDate, String region) {
+    public Vote(long electionId, long voterId, String candidateId, LocalDate castDate, String region) {
         this.electionId = electionId;
         this.voterId = voterId;
         this.candidateId = candidateId;
@@ -37,8 +37,8 @@ public class Vote {
         return this.electionId == electionId;
     }
 
-    public boolean hasCandidateId(long id) {
-        return this.candidateId == id;
+    public boolean hasCandidateId(String id) {
+        return this.candidateId.equals(id);
     }
 
     public long getElectionId() {

@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class CandidateId implements Serializable {
     private long electionId;
-    private long candidateId;
+    private String candidateId;
 
     public CandidateId() {
     }
 
-    public CandidateId(long electionId, long candidateId) {
+    public CandidateId(long electionId, String candidateId) {
         this.electionId = electionId;
         this.candidateId = candidateId;
     }

@@ -50,9 +50,13 @@ public class Candidate {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Candidate candidate)) return false;
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Candidate candidate)) {
+            return false;
+        }
         return Objects.equals(name, candidate.name) && Objects.equals(faction, candidate.faction);
     }
 

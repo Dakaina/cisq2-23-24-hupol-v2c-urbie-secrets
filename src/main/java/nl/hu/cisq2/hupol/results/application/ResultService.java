@@ -1,7 +1,7 @@
 package nl.hu.cisq2.hupol.results.application;
 
 import nl.hu.cisq2.hupol.candidates.Candidate;
-import nl.hu.cisq2.hupol.candidates.Repo;
+import nl.hu.cisq2.hupol.candidates.CandidateRepository;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import nl.hu.cisq2.hupol.votes.VoteRepository;
 import nl.hu.cisq2.hupol.votes.Vote;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @Service
 public class ResultService {
-    private final Repo candidatesRepository;
+    private final CandidateRepository candidatesRepository;
     private final VoteRepository votesRepository;
 
-    public ResultService(Repo candidatesRepository, VoteRepository votesRepository) {
+    public ResultService(CandidateRepository candidatesRepository, VoteRepository votesRepository) {
         this.candidatesRepository = candidatesRepository;
         this.votesRepository = votesRepository;
     }
@@ -36,7 +36,7 @@ public class ResultService {
                     continue;
                 }
 
-                if (vote.isForCandidate(candidate.getId())) {
+                if (vote.hasCandidateId(candidate.getId())) {
                     this.countVoteForCandidate(candidate, results);
                 }
             }
