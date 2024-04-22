@@ -8,23 +8,24 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@IdClass(VotingRight.class)
+@IdClass(VoteID.class)
 public class Vote {
     @Id
     private long electionId;
 
     @Id
     private long voterId;
-
-    private String candidateId;
+    @Id
+    private long candidateId;
 
     private LocalDate castDate;
 
     private String region;
 
-    public Vote() {}
+    public Vote() {
+    }
 
-    public Vote(long electionId, long voterId, String candidateId, LocalDate castDate, String region) {
+    public Vote(long electionId, long voterId, long candidateId, LocalDate castDate, String region) {
         this.electionId = electionId;
         this.voterId = voterId;
         this.candidateId = candidateId;
@@ -36,8 +37,8 @@ public class Vote {
         return this.electionId == electionId;
     }
 
-    public boolean isForCandidate(String id) {
-        return this.candidateId.equals(id);
+    public boolean hasCandidateId(long id) {
+        return this.candidateId == id;
     }
 
     public long getElectionId() {
@@ -48,14 +49,18 @@ public class Vote {
         return voterId;
     }
 
-    public VotingRight getVotingRight() {
-        return new VotingRight(electionId, voterId);
+    public VoteID getVotingRight() {
+        return new VoteID(electionId, voterId);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Vote vote)) return false;
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Vote vote)) {
+            return false;
+        }
         return Objects.equals(castDate, vote.castDate) && Objects.equals(candidateId, vote.candidateId) && Objects.equals(region, vote.region);
     }
 

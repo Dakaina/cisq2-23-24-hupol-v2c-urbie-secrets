@@ -3,7 +3,7 @@ package nl.hu.cisq2.hupol.results.application;
 import nl.hu.cisq2.hupol.candidates.Candidate;
 import nl.hu.cisq2.hupol.candidates.Repo;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
-import nl.hu.cisq2.hupol.votes.VRepo;
+import nl.hu.cisq2.hupol.votes.VoteRepository;
 import nl.hu.cisq2.hupol.votes.Vote;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class ResultService {
     private final Repo candidatesRepository;
-    private final VRepo votesRepository;
+    private final VoteRepository votesRepository;
 
-    public ResultService(Repo candidatesRepository, VRepo votesRepository) {
+    public ResultService(Repo candidatesRepository, VoteRepository votesRepository) {
         this.candidatesRepository = candidatesRepository;
         this.votesRepository = votesRepository;
     }
@@ -36,7 +36,7 @@ public class ResultService {
                     continue;
                 }
 
-                if (vote.isForCandidate(candidate.getCandidateId())) {
+                if (vote.isForCandidate(candidate.getId())) {
                     this.countVoteForCandidate(candidate, results);
                 }
             }
@@ -49,7 +49,7 @@ public class ResultService {
         boolean found = false;
 
         for (ResultPerCandidate result : results) {
-            if (result.isForCandidate(candidate.getCandidateId())) {
+            if (result.isForCandidate(candidate.getId())) {
                 result.countVote();
                 found = true;
                 break;
@@ -57,7 +57,7 @@ public class ResultService {
         }
 
         if (!found) {
-            results.add(new ResultPerCandidate(candidate.getCandidateId(), candidate.getName(), candidate.getFaction(), 1L));
+            results.add(new ResultPerCandidate(candidate.getId(), candidate.getName(), candidate.getFaction(), 1L));
         }
     }
 }

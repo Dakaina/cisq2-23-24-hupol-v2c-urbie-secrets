@@ -7,10 +7,10 @@ import jakarta.persistence.IdClass;
 import java.util.Objects;
 
 @Entity
-@IdClass(Candidacy.class)
+@IdClass(CandidateId.class)
 public class Candidate {
     @Id
-    private String candidateId;
+    private String id;
 
     @Id
     private long electionId;
@@ -22,8 +22,8 @@ public class Candidate {
     public Candidate() {
     }
 
-    public Candidate(String candidateId, long electionId,  String name, String faction) {
-        this.candidateId = candidateId;
+    public Candidate(String id, long electionId, String name, String faction) {
+        this.id = id;
         this.electionId = electionId;
         this.name = name;
         this.faction = faction;
@@ -33,12 +33,12 @@ public class Candidate {
         return this.electionId == id;
     }
 
-    public String getCandidateId() {
-        return this.candidateId;
+    public String getId() {
+        return this.id;
     }
 
-    public Candidacy getCandidacy() {
-        return new Candidacy(electionId, candidateId);
+    public CandidateId getCandidacy() {
+        return new CandidateId(electionId, id);
     }
 
     public String getName() {
