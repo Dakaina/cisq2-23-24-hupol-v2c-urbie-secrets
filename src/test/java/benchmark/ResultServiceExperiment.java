@@ -1,7 +1,7 @@
 package benchmark;
 
 import nl.hu.cisq2.hupol.candidates.Candidate;
-import nl.hu.cisq2.hupol.candidates.Repo;
+import nl.hu.cisq2.hupol.candidates.CandidateRepository;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import nl.hu.cisq2.hupol.votes.VRepo;
 import nl.hu.cisq2.hupol.votes.Vote;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @Service
 public class ResultServiceExperiment {
-    private final Repo candidatesRepository;
+    private final CandidateRepository candidatesRepository;
     private final VRepo votesRepository;
 
-    public ResultServiceExperiment(Repo candidatesRepository, VRepo votesRepository) {
+    public ResultServiceExperiment(CandidateRepository candidatesRepository, VRepo votesRepository) {
         this.candidatesRepository = candidatesRepository;
         this.votesRepository = votesRepository;
     }

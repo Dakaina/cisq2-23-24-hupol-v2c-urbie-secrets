@@ -1,7 +1,7 @@
 package nl.hu.cisq2.hupol.results.application;
 
 import nl.hu.cisq2.hupol.candidates.Candidate;
-import nl.hu.cisq2.hupol.candidates.Repo;
+import nl.hu.cisq2.hupol.candidates.CandidateRepository;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import nl.hu.cisq2.hupol.votes.VRepo;
 import nl.hu.cisq2.hupol.votes.Vote;
@@ -34,7 +34,7 @@ class ResultServiceTest {
     @Test
     @DisplayName("produce results per candidate")
     void resultsPerCandidate() {
-        var candidateRepository = Mockito.mock(Repo.class);
+        var candidateRepository = Mockito.mock(CandidateRepository.class);
         var voteRepository = Mockito.mock(VRepo.class);
         when(candidateRepository.findAll()).thenReturn(CANDIDATES);
         when(voteRepository.findAll()).thenReturn(VOTES);
@@ -53,7 +53,7 @@ class ResultServiceTest {
     @Test
     @DisplayName("empty results if no candidates in election")
     void emptyResults() {
-        var candidateRepository = Mockito.mock(Repo.class);
+        var candidateRepository = Mockito.mock(CandidateRepository.class);
         var voteRepository = Mockito.mock(VRepo.class);
         when(candidateRepository.findAll()).thenReturn(List.of());
         when(voteRepository.findAll()).thenReturn(List.of());

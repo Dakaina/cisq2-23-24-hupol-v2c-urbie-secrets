@@ -1,7 +1,7 @@
 package benchmark;
 
 import nl.hu.cisq2.hupol.candidates.Candidate;
-import nl.hu.cisq2.hupol.candidates.Repo;
+import nl.hu.cisq2.hupol.candidates.CandidateRepository;
 import nl.hu.cisq2.hupol.votes.VRepo;
 import nl.hu.cisq2.hupol.votes.Vote;
 import org.mockito.Mockito;
@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 
 public class RepositoryMocks {
     private static VRepo votesInstance = null;
-    private static Repo candidatesInstance = null;
+    private static CandidateRepository candidatesInstance = null;
 
     public static VRepo votes() {
         if (votesInstance == null) {
@@ -27,11 +27,11 @@ public class RepositoryMocks {
         return votesInstance;
     }
 
-    public static Repo candidates() {
+    public static CandidateRepository candidates() {
         if (candidatesInstance == null) {
             var allCandidates = randomCandidates();
 
-            candidatesInstance = Mockito.mock(Repo.class);
+            candidatesInstance = Mockito.mock(CandidateRepository.class);
             Mockito.when(candidatesInstance.findAll()).thenReturn(allCandidates);
         }
 
