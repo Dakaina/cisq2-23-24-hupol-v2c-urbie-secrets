@@ -1,5 +1,6 @@
 package nl.hu.cisq2.hupol.votes.presentation;
 
+import nl.hu.cisq2.hupol.votes.application.VoteService;
 import nl.hu.cisq2.hupol.votes.data.VoteRepository;
 import nl.hu.cisq2.hupol.votes.domain.Vote;
 import org.springframework.http.HttpStatus;
@@ -18,36 +19,18 @@ import java.util.List;
 
 @RestController
 public class VoteController {
-    VoteRepository voteRepository;
+    VoteService voteService;
 
-    public VoteController(VoteRepository voteRepository) {
-        this.voteRepository = voteRepository;
+    public VoteController(VoteService voteService) {
+
+        this.voteService = voteService;
     }
 
     @PostMapping("/votes")
-    public void importVotes(@RequestParam("file") MultipartFile f) { // upload file in body form data
+    public void importVotes(@RequestParam("file") MultipartFile file) {
         try {
-            //todo: take this out en make aparte static method ergens in /utils mapje
-            if(f!=null && !f.isEmpty()) {
-                List<Vote> vs = new ArrayList<>();
-                String c = new String(f.getBytes(), StandardCharsets.UTF_8); // file to string
-                // parse csv into votes to insert into db
-                String[] rs = c.split("\r\n|\r|\n");
-
-                for (int rnum = 0; rnum < rs.length; rnum++) {
-                    if(!rs[rnum].isEmpty()){
-                        if(!rs[rnum].isBlank()&&rs[rnum].length()>0){
-                            String[] cols = rs[rnum].split(";");
-                            vs.add(new Vote(Long.parseLong(cols[0]), Long.parseLong(cols[1]), cols[2], LocalDate.parse(cols[3]), cols[4]));                        } else {
-                            continue;
-                        }
-                    } else {
-                        continue;
-                    }
-                }
-                for (int i = 0; i < vs.size(); i++) {
-                    if (!voteRepository.existsById(vs.get(i).getVoteId())) voteRepository.save(vs.get(i));
-                }
+            if(file != null && !file.isEmpty()) {
+                voteService.importVotes(file);
             } else {throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing file");}
         }
         catch (IOException e) {throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot read file");}
