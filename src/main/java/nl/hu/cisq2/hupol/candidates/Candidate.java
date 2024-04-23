@@ -10,7 +10,7 @@ import java.util.Objects;
 @IdClass(CandidateId.class)
 public class Candidate {
     @Id
-    private String candidateId;
+    private String id;
 
     @Id
     private long electionId;
@@ -22,8 +22,8 @@ public class Candidate {
     public Candidate() {
     }
 
-    public Candidate(String candidateId, long electionId,  String name, String faction) {
-        this.candidateId = candidateId;
+    public Candidate(String id, long electionId, String name, String faction) {
+        this.id = id;
         this.electionId = electionId;
         this.name = name;
         this.faction = faction;
@@ -34,11 +34,11 @@ public class Candidate {
     }
 
     public String getId() {
-        return this.candidateId;
+        return this.id;
     }
 
     public CandidateId getCandidateId() {
-        return new CandidateId(electionId, candidateId);
+        return new CandidateId(electionId, id);
     }
 
     public String getName() {

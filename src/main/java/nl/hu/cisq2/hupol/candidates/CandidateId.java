@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class CandidateId implements Serializable {
     private long electionId;
-    private String candidateId;
+    private String id;
 
     public CandidateId() {
     }
 
-    public CandidateId(Long electionId, String candidateId) {
+    public CandidateId(Long electionId, String id) {
         this.electionId = electionId;
-        this.candidateId = candidateId;
+        this.id = id;
     }
 
     @Override
@@ -24,12 +24,12 @@ public class CandidateId implements Serializable {
             return false;
         }
         else {
-            return Objects.equals(electionId, that.electionId) && Objects.equals(candidateId, that.candidateId);
+            return Objects.equals(electionId, that.electionId) && Objects.equals(id, that.id);
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(electionId, candidateId);
+        return Objects.hash(electionId, id);
     }
 }
