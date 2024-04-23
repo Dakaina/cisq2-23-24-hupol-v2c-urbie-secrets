@@ -8,13 +8,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@IdClass(VotingRight.class)
+@IdClass(VoteId.class)
 public class Vote {
     @Id
     private long electionId;
 
     @Id
-    private long voterId;
+    private long id;
 
     private String candidateId;
 
@@ -24,9 +24,9 @@ public class Vote {
 
     public Vote() {}
 
-    public Vote(long electionId, long voterId, String candidateId, LocalDate castDate, String region) {
+    public Vote(long electionId, long id, String candidateId, LocalDate castDate, String region) {
         this.electionId = electionId;
-        this.voterId = voterId;
+        this.id = id;
         this.candidateId = candidateId;
         this.castDate = castDate;
         this.region = region;
@@ -36,7 +36,7 @@ public class Vote {
         return this.electionId == electionId;
     }
 
-    public boolean isForCandidate(String id) {
+    public boolean hasCandidateId(String id) {
         return this.candidateId.equals(id);
     }
 
@@ -44,19 +44,27 @@ public class Vote {
         return electionId;
     }
 
-    public long getVoterId() {
-        return voterId;
+    public long getId() {
+        return id;
     }
 
-    public VotingRight getVotingRight() {
-        return new VotingRight(electionId, voterId);
+    public VoteId getVoteId() {
+        return new VoteId(electionId, id);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Vote vote)) return false;
-        return Objects.equals(castDate, vote.castDate) && Objects.equals(candidateId, vote.candidateId) && Objects.equals(region, vote.region);
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Vote vote)) {
+            return false;
+        }
+        else {
+            return Objects.equals(castDate, vote.castDate) &&
+                    Objects.equals(candidateId, vote.candidateId) &&
+                    Objects.equals(region, vote.region);
+        }
     }
 
     @Override

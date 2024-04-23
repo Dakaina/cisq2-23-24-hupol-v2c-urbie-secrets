@@ -3,7 +3,7 @@ package benchmark;
 import nl.hu.cisq2.hupol.candidates.Candidate;
 import nl.hu.cisq2.hupol.candidates.CandidateRepository;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
-import nl.hu.cisq2.hupol.votes.VRepo;
+import nl.hu.cisq2.hupol.votes.VoteRepository;
 import nl.hu.cisq2.hupol.votes.Vote;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ class ResultServiceOriginalTest {
     @DisplayName("produce results per candidate")
     void resultsPerCandidate() {
         var candidateRepository = Mockito.mock(CandidateRepository.class);
-        var voteRepository = Mockito.mock(VRepo.class);
+        var voteRepository = Mockito.mock(VoteRepository.class);
         when(candidateRepository.findAll()).thenReturn(CANDIDATES);
         when(voteRepository.findAll()).thenReturn(VOTES);
 
@@ -54,7 +54,7 @@ class ResultServiceOriginalTest {
     @DisplayName("empty results if no candidates in election")
     void emptyResults() {
         var candidateRepository = Mockito.mock(CandidateRepository.class);
-        var voteRepository = Mockito.mock(VRepo.class);
+        var voteRepository = Mockito.mock(VoteRepository.class);
         when(candidateRepository.findAll()).thenReturn(List.of());
         when(voteRepository.findAll()).thenReturn(List.of());
 
