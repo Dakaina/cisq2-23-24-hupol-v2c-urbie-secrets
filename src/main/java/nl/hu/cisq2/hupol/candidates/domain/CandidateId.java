@@ -1,18 +1,18 @@
-package nl.hu.cisq2.hupol.candidates;
+package nl.hu.cisq2.hupol.candidates.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class CandidateId implements Serializable {
     private long electionId;
-    private String candidateId;
+    private String id;
 
     public CandidateId() {
     }
 
-    public CandidateId(long electionId, String candidateId) {
+    public CandidateId(Long electionId, String id) {
         this.electionId = electionId;
-        this.candidateId = candidateId;
+        this.id = id;
     }
 
     @Override
@@ -20,14 +20,16 @@ public class CandidateId implements Serializable {
         if (this == object) {
             return true;
         }
-        if (!(object instanceof CandidateId that)) {
+        else if (!(object instanceof CandidateId that)) {
             return false;
         }
-        return Objects.equals(electionId, that.electionId) && Objects.equals(candidateId, that.candidateId);
+        else {
+            return Objects.equals(electionId, that.electionId) && Objects.equals(id, that.id);
+        }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(electionId, candidateId);
+        return Objects.hash(electionId, id);
     }
 }

@@ -1,6 +1,9 @@
 package nl.hu.cisq2.hupol.candidates;
 
 import nl.hu.cisq2.hupol.Fixture;
+import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
+import nl.hu.cisq2.hupol.candidates.domain.Candidate;
+import nl.hu.cisq2.hupol.candidates.presentation.CandidateController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,9 @@
 package nl.hu.cisq2.hupol.votes;
 
 import nl.hu.cisq2.hupol.Fixture;
+import nl.hu.cisq2.hupol.votes.data.VoteRepository;
+import nl.hu.cisq2.hupol.votes.domain.Vote;
+import nl.hu.cisq2.hupol.votes.presentation.VoteController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
