@@ -1,5 +1,7 @@
-package nl.hu.cisq2.hupol.candidates;
+package nl.hu.cisq2.hupol.candidates.presentation;
 
+import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
+import nl.hu.cisq2.hupol.candidates.domain.Candidate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

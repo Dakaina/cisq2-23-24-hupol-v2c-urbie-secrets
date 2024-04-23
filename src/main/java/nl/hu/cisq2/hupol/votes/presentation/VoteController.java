@@ -1,5 +1,7 @@
-package nl.hu.cisq2.hupol.votes;
+package nl.hu.cisq2.hupol.votes.presentation;
 
+import nl.hu.cisq2.hupol.votes.data.VoteRepository;
+import nl.hu.cisq2.hupol.votes.domain.Vote;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

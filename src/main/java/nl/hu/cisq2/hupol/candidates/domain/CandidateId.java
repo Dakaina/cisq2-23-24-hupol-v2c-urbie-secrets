@@ -1,4 +1,4 @@
-package nl.hu.cisq2.hupol.candidates;
+package nl.hu.cisq2.hupol.candidates.domain;
 
 import java.io.Serializable;
 import java.util.Objects;

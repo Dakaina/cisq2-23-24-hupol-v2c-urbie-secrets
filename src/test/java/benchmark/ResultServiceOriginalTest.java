@@ -1,10 +1,10 @@
 package benchmark;
 
-import nl.hu.cisq2.hupol.candidates.Candidate;
-import nl.hu.cisq2.hupol.candidates.CandidateRepository;
+import nl.hu.cisq2.hupol.candidates.domain.Candidate;
+import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
-import nl.hu.cisq2.hupol.votes.VoteRepository;
-import nl.hu.cisq2.hupol.votes.Vote;
+import nl.hu.cisq2.hupol.votes.data.VoteRepository;
+import nl.hu.cisq2.hupol.votes.domain.Vote;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

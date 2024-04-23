@@ -1,4 +1,4 @@
-package nl.hu.cisq2.hupol.votes;
+package nl.hu.cisq2.hupol.votes.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
