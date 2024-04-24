@@ -10,23 +10,23 @@ public class VoteId implements Serializable {
     public VoteId() {
     }
 
-    public VoteId(long electionId, long id) {
+    public VoteId(final long electionId, final long id) {
         this.electionId = electionId;
         this.id = id;
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (!(object instanceof VoteId that)) {
-            return false;
-        }
-        else {
-            return electionId == that.electionId && id == that.id;
+    public boolean equals(final Object object) {
+        boolean result = false;
 
+        if (this == object) {
+            result = true;
         }
+        else if (object instanceof VoteId that) {
+            result = electionId == that.electionId && id == that.id;
+        }
+
+        return result;
     }
 
     @Override
