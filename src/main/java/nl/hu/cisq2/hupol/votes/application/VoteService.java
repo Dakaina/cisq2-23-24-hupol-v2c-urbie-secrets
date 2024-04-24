@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,7 +22,7 @@ public class VoteService {
     }
 
     public void importVotes(final MultipartFile file) throws IOException {
-        final ArrayList<String[]> columnsList = FileUnpacker.getColumns(file);
+        final List<String[]> columnsList = FileUnpacker.getColumns(file);
 
         for (final String[] columns : columnsList){
             final Vote vote = new Vote(Long.parseLong(columns[0]), Long.parseLong(columns[1]), columns[2], LocalDate.parse(columns[3]), columns[4]);

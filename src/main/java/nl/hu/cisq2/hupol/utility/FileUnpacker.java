@@ -5,15 +5,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FileUnpacker {
-    public static ArrayList<String[]> getColumns(MultipartFile file) throws IOException {
-        ArrayList<String[]> columnsList = new ArrayList<>();
+    public static List<String[]> getColumns(final MultipartFile file) throws IOException {
+        final List<String[]> columnsList = new ArrayList<>();
 
-        String fileStringified = new String(file.getBytes(), StandardCharsets.UTF_8);
-        String[] rows = fileStringified.split("\r\n|\r|\n");
+        final String fileStringified = new String(file.getBytes(), StandardCharsets.UTF_8);
+        final String[] rows = fileStringified.split("\r\n|\r|\n");
 
-        for (String row : rows) {
+        for (final String row : rows) {
             if (!row.isBlank()) {
                 columnsList.add(row.split(";"));
             }
