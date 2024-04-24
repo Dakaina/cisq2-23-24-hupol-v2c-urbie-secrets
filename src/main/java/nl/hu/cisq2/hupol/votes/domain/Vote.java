@@ -24,7 +24,7 @@ public class Vote {
 
     public Vote() {}
 
-    public Vote(long electionId, long id, String candidateId, LocalDate castDate, String region) {
+    public Vote(final long electionId, final long id, final String candidateId, final LocalDate castDate, final String region) {
         this.electionId = electionId;
         this.id = id;
         this.candidateId = candidateId;
@@ -32,11 +32,11 @@ public class Vote {
         this.region = region;
     }
 
-    public boolean hasElectionId(Long electionId) {
+    public boolean hasElectionId(final long electionId) {
         return this.electionId == electionId;
     }
 
-    public boolean hasCandidateId(String id) {
+    public boolean hasCandidateId(final String id) {
         return this.candidateId.equals(id);
     }
 
@@ -53,18 +53,19 @@ public class Vote {
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
+        boolean result = false;
+
         if (this == object) {
-            return true;
+            result = true;
         }
-        if (!(object instanceof Vote vote)) {
-            return false;
-        }
-        else {
-            return Objects.equals(castDate, vote.castDate) &&
+        else if (object instanceof Vote vote) {
+            result = Objects.equals(castDate, vote.castDate) &&
                     Objects.equals(candidateId, vote.candidateId) &&
                     Objects.equals(region, vote.region);
         }
+
+        return result;
     }
 
     @Override

@@ -1,3 +1,5 @@
+pom.xml goal bij pmd is op het moment uitgecomment zodat testen makkelijker is, terug doen niet vergeten
+
 general:
     
     candidates,votes,results directory namen naar 1 candidate,vote,result (of misschien duidelijker via candidacy, voting)
