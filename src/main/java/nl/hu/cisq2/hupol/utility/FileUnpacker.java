@@ -13,11 +13,9 @@ public class FileUnpacker {
         final String fileStringified = new String(file.getBytes(), StandardCharsets.UTF_8);
         final String[] rows = fileStringified.split("\r\n|\r|\n");
 
-        List<String[]> rowsSplit = Arrays.stream(rows)
+        return Arrays.stream(rows)
                 .filter(row -> !row.isBlank())
                 .map(row -> row.split(";"))
                 .collect(Collectors.toList());
-
-        return rowsSplit;
     }
 }

@@ -27,7 +27,6 @@ public class VoteController {
             else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing file");}
         }
-        catch (IOException e) {throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot read file", e);}
-        catch (DateTimeParseException | NumberFormatException e) {throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File incorrect format: " + e.getMessage(), e); }
+        catch (IOException | DateTimeParseException | NumberFormatException e) {throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid file: " + e.getMessage(), e); }
     }
 }
