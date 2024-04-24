@@ -14,17 +14,17 @@ import java.util.ArrayList;
 @Service
 @Transactional
 public class VoteService {
-    VoteRepository voteRepository;
+    private final VoteRepository voteRepository;
 
-    public VoteService(VoteRepository voteRepository){
+    public VoteService(final VoteRepository voteRepository){
         this.voteRepository = voteRepository;
     }
 
-    public void importVotes(MultipartFile file) throws IOException {
-        ArrayList<String[]> columnsList = FileUnpacker.getColumns(file);
+    public void importVotes(final MultipartFile file) throws IOException {
+        final ArrayList<String[]> columnsList = FileUnpacker.getColumns(file);
 
-        for (String[] columns : columnsList){
-            Vote vote = new Vote(Long.parseLong(columns[0]), Long.parseLong(columns[1]), columns[2], LocalDate.parse(columns[3]), columns[4]);
+        for (final String[] columns : columnsList){
+            final Vote vote = new Vote(Long.parseLong(columns[0]), Long.parseLong(columns[1]), columns[2], LocalDate.parse(columns[3]), columns[4]);
             if (!voteRepository.existsById(vote.getVoteId())){
                 voteRepository.save(vote);
             }
