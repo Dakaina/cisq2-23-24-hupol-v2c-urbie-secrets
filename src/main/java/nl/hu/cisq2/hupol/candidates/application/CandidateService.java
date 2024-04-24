@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +20,7 @@ public class CandidateService {
     }
 
     public void importCandidates(MultipartFile file) throws IOException {
-        List<String[]> columnsList = FileUnpacker.getColumns(file);
+        List<String[]> columnsList = FileUnpacker.unpack(file);
 
         for (String[] columns : columnsList){
             Candidate candidate = new Candidate(columns[0], Long.parseLong(columns[1]), columns[2], columns[3]);
