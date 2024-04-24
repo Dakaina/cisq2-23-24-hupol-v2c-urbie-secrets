@@ -105,7 +105,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<!--<goal>check</goal>-->
+							<goal>check</goal>
 						</goals>
 					</execution>
 				</executions>

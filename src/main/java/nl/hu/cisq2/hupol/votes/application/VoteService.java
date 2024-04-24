@@ -16,12 +16,10 @@ public class VoteService {
         this.voteRepository = voteRepository;
     }
 
-    public void importVotes(final List<String[]> columnsList) throws IOException {
-        for (final String[] columns : columnsList){
-            final Vote vote = new Vote(Long.parseLong(columns[0]), Long.parseLong(columns[1]), columns[2], LocalDate.parse(columns[3]), columns[4]);
-            if (!voteRepository.existsById(vote.getVoteId())){
-                voteRepository.save(vote);
-            }
-        }
+    public void importVotes(final List<String[]> rows) throws IOException {
+        rows.stream()
+                .map(row -> new Vote(Long.parseLong(row[0]), Long.parseLong(row[1]), row[2], LocalDate.parse(row[3]), row[4]))
+                .filter(vote -> !voteRepository.existsById(vote.getVoteId()))
+                .forEach(voteRepository::save);
     }
 }
