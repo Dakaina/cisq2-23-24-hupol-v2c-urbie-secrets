@@ -15,23 +15,23 @@ public class ResultService {
     private final CandidateRepository candidatesRepository;
     private final VoteRepository votesRepository;
 
-    public ResultService(CandidateRepository candidatesRepository, VoteRepository votesRepository) {
+    public ResultService(final CandidateRepository candidatesRepository, final VoteRepository votesRepository) {
         this.candidatesRepository = candidatesRepository;
         this.votesRepository = votesRepository;
     }
 
-    public List<ResultPerCandidate> calculateResultsPerCandidate(Long electionId) {
-        List<ResultPerCandidate> results = new ArrayList<>();
+    public List<ResultPerCandidate> calculateResultsPerCandidate(final Long electionId) {
+        final List<ResultPerCandidate> results = new ArrayList<>();
 
-        List<Candidate> candidates = candidatesRepository.findAll();
-        List<Vote> votes = votesRepository.findAll();
+        final List<Candidate> candidates = candidatesRepository.findAll();
+        final List<Vote> votes = votesRepository.findAll();
 
-        for (Vote vote : votes) {
+        for (final Vote vote : votes) {
             if (!vote.hasElectionId(electionId)) {
                 continue;
             }
 
-            for (Candidate candidate : candidates) {
+            for (final Candidate candidate : candidates) {
                 if (!candidate.hasElectionId(electionId)) {
                     continue;
                 }
@@ -45,10 +45,10 @@ public class ResultService {
         return results;
     }
 
-    private void countVoteForCandidate(Candidate candidate, List<ResultPerCandidate> results) {
+    private void countVoteForCandidate(final Candidate candidate, final List<ResultPerCandidate> results) {
         boolean found = false;
 
-        for (ResultPerCandidate result : results) {
+        for (final ResultPerCandidate result : results) {
             if (result.isForCandidate(candidate.getId())) {
                 result.countVote();
                 found = true;

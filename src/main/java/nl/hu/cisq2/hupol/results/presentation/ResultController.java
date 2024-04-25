@@ -12,12 +12,12 @@ import java.util.List;
 public class ResultController {
     private final ResultService service;
 
-    public ResultController(ResultService service) {
+    public ResultController(final ResultService service) {
         this.service = service;
     }
 
     @GetMapping("/election/{electionId}/results")
-    public List<ResultPerCandidate> getResultsPerCandidate(@PathVariable Long electionId) {
+    public List<ResultPerCandidate> getResultsPerCandidate(@PathVariable final Long electionId) {
         return service.calculateResultsPerCandidate(electionId);
     }
 }
