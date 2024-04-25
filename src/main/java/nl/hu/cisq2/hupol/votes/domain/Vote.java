@@ -8,13 +8,11 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@IdClass(VoteId.class)
 public class Vote {
     @Id
-    private long electionId;
-
-    @Id
     private long id;
+
+    private long electionId;
 
     private String candidateId;
 
@@ -48,10 +46,6 @@ public class Vote {
         return id;
     }
 
-    public VoteId getVoteId() {
-        return new VoteId(electionId, id);
-    }
-
     @Override
     public boolean equals(final Object object) {
         boolean result = false;
@@ -62,7 +56,8 @@ public class Vote {
         else if (object instanceof Vote vote) {
             result = Objects.equals(castDate, vote.castDate) &&
                     Objects.equals(candidateId, vote.candidateId) &&
-                    Objects.equals(region, vote.region);
+                    Objects.equals(region, vote.region) &&
+                    Objects.equals(electionId, vote.electionId);
         }
 
         return result;
@@ -70,6 +65,6 @@ public class Vote {
 
     @Override
     public int hashCode() {
-        return Objects.hash(castDate, candidateId, region);
+        return Objects.hash(castDate, candidateId, region, electionId);
     }
 }

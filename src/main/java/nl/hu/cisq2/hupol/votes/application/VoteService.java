@@ -19,7 +19,7 @@ public class VoteService {
     public void importVotes(final List<String[]> rows) throws IOException {
         rows.stream()
                 .map(row -> new Vote(Long.parseLong(row[0]), Long.parseLong(row[1]), row[2], LocalDate.parse(row[3]), row[4]))
-                .filter(vote -> !voteRepository.existsById(vote.getVoteId()))
+                .filter(vote -> !voteRepository.existsById(vote.getId()))
                 .forEach(voteRepository::save);
     }
 }
