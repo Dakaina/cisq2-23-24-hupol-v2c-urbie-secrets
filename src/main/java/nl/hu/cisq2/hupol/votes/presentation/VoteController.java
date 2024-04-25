@@ -1,5 +1,5 @@
 package nl.hu.cisq2.hupol.votes.presentation;
-import nl.hu.cisq2.hupol.utility.FileUnpacker;
+import nl.hu.cisq2.hupol.utility.FileParser;
 import nl.hu.cisq2.hupol.votes.application.VoteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +22,7 @@ public class VoteController {
     public void importVotes(@RequestParam("file") final MultipartFile file) {
         try {
             if(file != null && !file.isEmpty()) {
-                voteService.importVotes(FileUnpacker.unpack(file));
+                voteService.importVotes(FileParser.unpack(file));
             }
             else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing file");}
