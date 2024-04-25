@@ -22,14 +22,14 @@ public class Candidate {
     public Candidate() {
     }
 
-    public Candidate(String id, long electionId, String name, String faction) {
+    public Candidate(final String id, final long electionId, final String name, final String faction) {
         this.id = id;
         this.electionId = electionId;
         this.name = name;
         this.faction = faction;
     }
 
-    public boolean hasElectionId(long id) {
+    public boolean hasElectionId(final long id) {
         return this.electionId == id;
     }
 
@@ -50,16 +50,17 @@ public class Candidate {
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
+        boolean result = false;
+
         if (this == object) {
-            return true;
+            result = true;
         }
-        else if (!(object instanceof Candidate candidate)) {
-            return false;
+        else if (object instanceof Candidate candidate) {
+            result = Objects.equals(name, candidate.name) && Objects.equals(faction, candidate.faction);
         }
-        else {
-            return Objects.equals(name, candidate.name) && Objects.equals(faction, candidate.faction);
-        }
+
+        return result;
     }
 
     @Override

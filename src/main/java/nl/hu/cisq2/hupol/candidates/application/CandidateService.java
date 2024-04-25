@@ -13,20 +13,18 @@ import java.util.List;
 @Service
 @Transactional
 public class CandidateService {
-    CandidateRepository candidateRepository;
+    private CandidateRepository candidateRepository;
 
-    public CandidateService(CandidateRepository candidateRepository){
+    public CandidateService(final CandidateRepository candidateRepository){
         this.candidateRepository = candidateRepository;
     }
 
-    public void importCandidates(MultipartFile file) throws IOException {
+    public void importCandidates(final MultipartFile file) throws IOException {
         List<String[]> columnsList = FileUnpacker.unpack(file);
 
-        for (String[] columns : columnsList){
-            Candidate candidate = new Candidate(columns[0], Long.parseLong(columns[1]), columns[2], columns[3]);
-            if (!candidateRepository.existsById(candidate.getCandidateId())){
-                candidateRepository.save(candidate);
-            }
-        }
+        columnsList.stream()
+                .map((row) -> new Candidate(row[0], Long.parseLong(row[1]), row[2], row[3]))
+                .filter((candidate) -> candidateRepository.existsById(candidate.getCandidateId()))
+                .forEach(candidateRepository::save);
     }
 }

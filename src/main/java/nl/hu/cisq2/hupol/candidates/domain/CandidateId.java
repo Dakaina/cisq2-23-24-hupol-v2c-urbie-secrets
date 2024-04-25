@@ -10,22 +10,23 @@ public class CandidateId implements Serializable {
     public CandidateId() {
     }
 
-    public CandidateId(Long electionId, String id) {
+    public CandidateId(final Long electionId, final String id) {
         this.electionId = electionId;
         this.id = id;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
+        boolean result = false;
+
         if (this == object) {
-            return true;
+            result = true;
         }
-        else if (!(object instanceof CandidateId that)) {
-            return false;
+        else if (object instanceof CandidateId that) {
+            result = Objects.equals(electionId, that.electionId) && Objects.equals(id, that.id);;
         }
-        else {
-            return Objects.equals(electionId, that.electionId) && Objects.equals(id, that.id);
-        }
+
+        return result;
     }
 
     @Override
