@@ -24,7 +24,7 @@ public class CandidateService {
 
         columnsList.stream()
                 .map((row) -> new Candidate(row[0], Long.parseLong(row[1]), row[2], row[3]))
-                .filter((candidate) -> candidateRepository.existsById(candidate.getCandidateId()))
+                .filter((candidate) -> candidateRepository.existsById(candidate.getId()))
                 .forEach(candidateRepository::save);
     }
 }

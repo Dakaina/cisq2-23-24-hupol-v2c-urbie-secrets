@@ -2,17 +2,14 @@ package nl.hu.cisq2.hupol.candidates.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 
 import java.util.Objects;
 
 @Entity
-@IdClass(CandidateId.class)
 public class Candidate {
     @Id
     private String id;
 
-    @Id
     private long electionId;
 
     private String name;
@@ -37,10 +34,6 @@ public class Candidate {
         return this.id;
     }
 
-    public CandidateId getCandidateId() {
-        return new CandidateId(electionId, id);
-    }
-
     public String getName() {
         return name;
     }
@@ -57,7 +50,9 @@ public class Candidate {
             result = true;
         }
         else if (object instanceof Candidate candidate) {
-            result = Objects.equals(name, candidate.name) && Objects.equals(faction, candidate.faction);
+            result = Objects.equals(name, candidate.name) &&
+                    Objects.equals(faction, candidate.faction) &&
+                    Objects.equals(electionId, candidate.electionId);
         }
 
         return result;
@@ -65,6 +60,6 @@ public class Candidate {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, faction);
+        return Objects.hash(name, faction, electionId);
     }
 }
