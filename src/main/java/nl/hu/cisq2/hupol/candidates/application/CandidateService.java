@@ -3,7 +3,7 @@ package nl.hu.cisq2.hupol.candidates.application;
 import jakarta.transaction.Transactional;
 import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
 import nl.hu.cisq2.hupol.candidates.domain.Candidate;
-import nl.hu.cisq2.hupol.utility.FileUnpacker;
+import nl.hu.cisq2.hupol.utility.FileParser;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +20,7 @@ public class CandidateService {
     }
 
     public void importCandidates(final MultipartFile file) throws IOException {
-        final List<String[]> columnsList = FileUnpacker.unpack(file);
+        final List<String[]> columnsList = FileParser.unpack(file);
 
         columnsList.stream()
                 .map((row) -> new Candidate(row[0], Long.parseLong(row[1]), row[2], row[3]))
