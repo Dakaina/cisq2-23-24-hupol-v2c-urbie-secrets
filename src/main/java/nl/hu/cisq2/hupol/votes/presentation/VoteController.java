@@ -22,7 +22,7 @@ public class VoteController {
     public void importVotes(@RequestParam("file") final MultipartFile file) {
         try {
             if(file != null && !file.isEmpty()) {
-                voteService.importVotes(FileParser.unpack(file));
+                voteService.importVotes(file);
             }
             else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing file");}
