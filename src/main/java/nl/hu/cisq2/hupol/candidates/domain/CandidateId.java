@@ -23,7 +23,7 @@ public class CandidateId implements Serializable {
             result = true;
         }
         else if (object instanceof CandidateId that) {
-            result = Objects.equals(electionId, that.electionId) && Objects.equals(id, that.id);;
+            result = Objects.equals(electionId, that.electionId) && Objects.equals(id, that.id);
         }
 
         return result;

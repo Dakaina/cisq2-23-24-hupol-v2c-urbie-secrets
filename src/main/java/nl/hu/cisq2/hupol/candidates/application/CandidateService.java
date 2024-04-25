@@ -20,7 +20,7 @@ public class CandidateService {
     }
 
     public void importCandidates(final MultipartFile file) throws IOException {
-        List<String[]> columnsList = FileUnpacker.unpack(file);
+        final List<String[]> columnsList = FileUnpacker.unpack(file);
 
         columnsList.stream()
                 .map((row) -> new Candidate(row[0], Long.parseLong(row[1]), row[2], row[3]))
