@@ -30,7 +30,7 @@ Vote.java:
 Controller.java:
 
     Verander naar VoteController voor duidelijkheid
-    Verander variabele repo naar voteRepository voor duidelijkheid
+    Verander variabele candidateRepository naar voteRepository voor duidelijkheid
     Verander methode importtvotes naar importVotes (misschien importVotesFromFile)
     Verander variabele f naar file in methode importVotes
     Voeg spaties toe in de if bij f != null
@@ -73,7 +73,7 @@ Candidacy.java:
 candidates.java:
 
     Verander naar CandidateController voor duidelijkheid
-    Verander variabele afkorting repo naar candidateRepository voor duidelijkheid
+    Verander variabele afkorting candidateRepository naar candidateRepository voor duidelijkheid
     Verander de naam van de methode Importcandidatelist naar importCandidateList
     Verander variabele f naar file
     Voeg spaties toe bij de eerste if f != null
