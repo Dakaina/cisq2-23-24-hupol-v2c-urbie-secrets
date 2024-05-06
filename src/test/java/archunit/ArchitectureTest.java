@@ -87,6 +87,66 @@ public class ArchitectureTest {
 
         rule.check(importedClasses);
     }
+    @Test
+    @DisplayName("Data layer should not access any other layer")
+    void dataLayerShouldNotAccessAnyOtherLayer() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("your.package");
+
+        ArchRule rule = noClasses().that().resideInAPackage("..data..")
+                .should().accessClassesThat().resideOutsideOfPackage("..data..");
+
+        rule.check(importedClasses);
+    }
+    @Test
+    @DisplayName("Service layer should only access the domain and data layers")
+    void serviceLayerShouldOnlyAccessDomainAndDataLayers() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("your.package");
+
+        ArchRule rule = noClasses().that().resideInAPackage("..service..")
+                .should().accessClassesThat().resideOutsideOfPackages("..domain..", "..data..");
+
+        rule.check(importedClasses);
+    }
+    @Test
+    @DisplayName("Utility layer should not access any other layer")
+    void utilityLayerShouldNotAccessAnyOtherLayer() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("your.package");
+
+        ArchRule rule = noClasses().that().resideInAPackage("..utility..")
+                .should().accessClassesThat().resideOutsideOfPackage("..utility..");
+
+        rule.check(importedClasses);
+    }
+    @Test
+    @DisplayName("Controller layer should only access the service layer")
+    void controllerLayerShouldOnlyAccessServiceLayer() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("your.package");
+
+        ArchRule rule = noClasses().that().resideInAPackage("..controller..")
+                .should().accessClassesThat().resideOutsideOfPackage("..service..");
+
+        rule.check(importedClasses);
+    }
+    @Test
+    @DisplayName("Service layer should only access the controller layer")
+    void serviceLayerShouldOnlyAccessControllerLayer() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("your.package");
+
+        ArchRule rule = noClasses().that().resideInAPackage("..service..")
+                .should().accessClassesThat().resideOutsideOfPackage("..controller..");
+
+        rule.check(importedClasses);
+    }
+    @Test
+    @DisplayName("Data layer should only access the domain layer")
+    void dataLayerShouldOnlyAccessDomainLayer() {
+        JavaClasses importedClasses = new ClassFileImporter().importPackages("your.package");
+
+        ArchRule rule = noClasses().that().resideInAPackage("..data..")
+                .should().accessClassesThat().resideOutsideOfPackage("..domain..");
+
+        rule.check(importedClasses);
+    }
 }
 
 
