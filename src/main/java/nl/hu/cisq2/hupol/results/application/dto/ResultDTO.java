@@ -2,6 +2,8 @@ package nl.hu.cisq2.hupol.results.application.dto;
 
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 
+import java.util.Objects;
+
 public class ResultDTO {
     private final String candidateId;
     private final String candidateName;
@@ -29,5 +31,26 @@ public class ResultDTO {
 
     public Long getVotes() {
         return votes;
+    }
+
+    @Override
+    public boolean equals(final Object object) {
+        boolean result = false;
+
+        if (this == object) {
+            result = true;
+        }
+        else if (object instanceof ResultDTO that) {
+            result = Objects.equals(candidateId, that.candidateId) &&
+                    Objects.equals(candidateName, that.candidateName) &&
+                    Objects.equals(faction, that.faction) &&
+                    Objects.equals(votes, that.votes);
+        }
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(candidateId, candidateName, faction, votes);
     }
 }
