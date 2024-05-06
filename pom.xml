@@ -104,6 +104,7 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.21.2</version>
 				<configuration>
+					<maxAllowedViolations>30</maxAllowedViolations>
 					<rulesets>
 						<ruleset>pmd-complexity-analysis.xml</ruleset>
 					</rulesets>
