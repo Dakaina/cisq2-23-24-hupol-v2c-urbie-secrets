@@ -2,7 +2,6 @@ package nl.hu.cisq2.hupol.results.presentation;
 
 import nl.hu.cisq2.hupol.results.application.ResultService;
 import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
-import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

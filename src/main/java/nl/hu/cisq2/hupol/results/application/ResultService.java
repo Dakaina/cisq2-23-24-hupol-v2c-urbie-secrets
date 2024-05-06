@@ -28,26 +28,18 @@ public class ResultService {
         final List<Vote> votes = votesRepository.findAll();
 
         for (final Vote vote : votes) {
-            if (!vote.hasElectionId(electionId)) {
-                continue;
-            }
-
-            for (final Candidate candidate : candidates) {
-                if (!candidate.hasElectionId(electionId)) {
-                    continue;
-                }
-
-                if (vote.hasCandidateId(candidate.getId())) {
-                    this.countVoteForCandidate(candidate, results);
+            if (vote.hasElectionId(electionId)) {
+                for (final Candidate candidate : candidates) {
+                    if (candidate.hasElectionId(electionId) && vote.hasCandidateId(candidate.getId())) {
+                        this.countVoteForCandidate(candidate, results);
+                    }
                 }
             }
         }
 
-        List<ResultDTO> resultDTOS = results.stream()
+        return results.stream()
                 .map(ResultDTO::new)
                 .toList();
-
-        return resultDTOS;
     }
 
     private void countVoteForCandidate(final Candidate candidate, final List<ResultPerCandidate> results) {
