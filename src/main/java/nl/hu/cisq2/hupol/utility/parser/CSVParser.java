@@ -1,4 +1,4 @@
-package nl.hu.cisq2.hupol.utility.fileParser;
+package nl.hu.cisq2.hupol.utility.parser;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.function.Function;
 
 public class CSVParser implements FileParser{
-    public <T> List<T> parse(MultipartFile file, Function<String[], T> mapper) throws IOException {
+
+    @Override
+    public <T> List<T> parse(final MultipartFile file, final Function<String[], T> mapper) throws IOException {
         final String fileStringified = new String(file.getBytes(), StandardCharsets.UTF_8);
         final String[] rows = fileStringified.split("\r\n|\r|\n");
 

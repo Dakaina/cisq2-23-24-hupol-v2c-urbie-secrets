@@ -1,4 +1,4 @@
-package nl.hu.cisq2.hupol.utility.fileParser;
+package nl.hu.cisq2.hupol.utility.parser;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,5 +8,5 @@ import java.util.function.Function;
 
 
 public interface FileParser {
-    public <T> List<T> parse(MultipartFile file, Function<String[], T> mapper) throws IOException;
+    <T> List<T> parse(MultipartFile file, Function<String[], T> mapper) throws IOException;
 }

@@ -1,5 +1,4 @@
 package nl.hu.cisq2.hupol.votes.presentation;
-import nl.hu.cisq2.hupol.utility.FileParser;
 import nl.hu.cisq2.hupol.votes.application.VoteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

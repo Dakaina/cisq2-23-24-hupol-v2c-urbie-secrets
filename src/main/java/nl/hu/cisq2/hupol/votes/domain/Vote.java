@@ -2,7 +2,6 @@ package nl.hu.cisq2.hupol.votes.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 
 import java.time.LocalDate;
 import java.util.Objects;
