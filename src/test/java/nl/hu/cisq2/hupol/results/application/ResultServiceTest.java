@@ -2,6 +2,7 @@ package nl.hu.cisq2.hupol.results.application;
 
 import nl.hu.cisq2.hupol.candidates.domain.Candidate;
 import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
+import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import nl.hu.cisq2.hupol.votes.data.VoteRepository;
 import nl.hu.cisq2.hupol.votes.domain.Vote;
@@ -43,8 +44,8 @@ class ResultServiceTest {
         var results = resultService.calculateResultsPerCandidate(1L);
 
         var expectedResults = List.of(
-                new ResultPerCandidate("c1", "candidate1", "faction1", 2L),
-                new ResultPerCandidate("c3", "candidate3", "faction2", 1L)
+                new ResultDTO(new ResultPerCandidate("c1", "candidate1", "faction1", 2L)),
+                new ResultDTO(new ResultPerCandidate("c3", "candidate3", "faction2", 1L))
         );
 
         expectedResults.forEach(expected -> assertTrue(results.contains(expected)));

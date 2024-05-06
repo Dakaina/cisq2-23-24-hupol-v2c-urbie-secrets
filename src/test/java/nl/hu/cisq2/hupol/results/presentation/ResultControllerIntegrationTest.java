@@ -1,6 +1,7 @@
 package nl.hu.cisq2.hupol.results.presentation;
 
 import nl.hu.cisq2.hupol.results.application.ResultService;
+import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class ResultControllerIntegrationTest {
     void getElectionResults() throws Exception {
         Mockito.when(service.calculateResultsPerCandidate(0L))
                 .thenReturn(List.of(
-                        new ResultPerCandidate("32id123", "name", "faction", 1000L)
+                        new ResultDTO(new ResultPerCandidate("32id123", "name", "faction", 1000L))
                 ));
 
         var request = get("/election/0/results")

@@ -2,6 +2,7 @@ package nl.hu.cisq2.hupol.results.application;
 
 import nl.hu.cisq2.hupol.candidates.domain.Candidate;
 import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
+import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import nl.hu.cisq2.hupol.votes.data.VoteRepository;
 import nl.hu.cisq2.hupol.votes.domain.Vote;
@@ -20,7 +21,7 @@ public class ResultService {
         this.votesRepository = votesRepository;
     }
 
-    public List<ResultPerCandidate> calculateResultsPerCandidate(final Long electionId) {
+    public List<ResultDTO> calculateResultsPerCandidate(final Long electionId) {
         final List<ResultPerCandidate> results = new ArrayList<>();
 
         final List<Candidate> candidates = candidatesRepository.findAll();
@@ -42,7 +43,11 @@ public class ResultService {
             }
         }
 
-        return results;
+        List<ResultDTO> resultDTOS = results.stream()
+                .map(ResultDTO::new)
+                .toList();
+
+        return resultDTOS;
     }
 
     private void countVoteForCandidate(final Candidate candidate, final List<ResultPerCandidate> results) {

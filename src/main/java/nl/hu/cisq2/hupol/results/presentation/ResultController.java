@@ -1,6 +1,7 @@
 package nl.hu.cisq2.hupol.results.presentation;
 
 import nl.hu.cisq2.hupol.results.application.ResultService;
+import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ public class ResultController {
     }
 
     @GetMapping("/election/{electionId}/results")
-    public List<ResultPerCandidate> getResultsPerCandidate(@PathVariable final Long electionId) {
+    public List<ResultDTO> getResultsPerCandidate(@PathVariable final Long electionId) {
         return service.calculateResultsPerCandidate(electionId);
     }
 }
