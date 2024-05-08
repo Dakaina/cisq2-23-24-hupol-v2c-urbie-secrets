@@ -26,4 +26,8 @@ public class VoteService {
                 .filter(vote -> !voteRepository.existsById(vote.getId()))
                 .forEach(voteRepository::save);
     }
+
+    public List<Vote> findAllVotes(){
+        return voteRepository.findAll();
+    }
 }

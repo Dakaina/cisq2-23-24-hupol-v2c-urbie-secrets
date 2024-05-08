@@ -1,9 +1,11 @@
 package nl.hu.cisq2.hupol.results.application;
 
+import nl.hu.cisq2.hupol.candidates.application.CandidateService;
 import nl.hu.cisq2.hupol.candidates.domain.Candidate;
 import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
 import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
+import nl.hu.cisq2.hupol.votes.application.VoteService;
 import nl.hu.cisq2.hupol.votes.data.VoteRepository;
 import nl.hu.cisq2.hupol.votes.domain.Vote;
 import org.springframework.stereotype.Service;
@@ -13,48 +15,42 @@ import java.util.List;
 
 @Service
 public class ResultService {
-    private final CandidateRepository candidatesRepository;
-    private final VoteRepository votesRepository;
+    private final CandidateService candidateService;
+    private final VoteService voteService;
 
-    public ResultService(final CandidateRepository candidatesRepository, final VoteRepository votesRepository) {
-        this.candidatesRepository = candidatesRepository;
-        this.votesRepository = votesRepository;
+    public ResultService(final CandidateService candidateService, final VoteService voteService) {
+        this.candidateService = candidateService;
+        this.voteService = voteService;
     }
 
-    public List<ResultDTO> calculateResultsPerCandidate(final Long electionId) {
+    public List<ResultDTO> calculateResultsPerCandidate(final Long electionId){
         final List<ResultPerCandidate> results = new ArrayList<>();
+        final List<Candidate> candidates = candidateService.findAllCandidates();
+        final List<Vote> votes = voteService.findAllVotes();
 
-        final List<Candidate> candidates = candidatesRepository.findAll();
-        final List<Vote> votes = votesRepository.findAll();
-
-        for (final Vote vote : votes) {
-            if (vote.hasElectionId(electionId)) {
-                for (final Candidate candidate : candidates) {
-                    if (candidate.hasElectionId(electionId) && vote.hasCandidateId(candidate.getId())) {
-                        this.countVoteForCandidate(candidate, results);
-                    }
-                }
-            }
-        }
+        addCandidates(candidates, results, electionId);
+        countVotes(votes, results, electionId);
 
         return results.stream()
                 .map(ResultDTO::new)
                 .toList();
     }
 
-    private void countVoteForCandidate(final Candidate candidate, final List<ResultPerCandidate> results) {
-        boolean found = false;
-
-        for (final ResultPerCandidate result : results) {
-            if (result.isForCandidate(candidate.getId())) {
-                result.countVote();
-                found = true;
-                break;
+    private void addCandidates(final List<Candidate> candidates, final List<ResultPerCandidate> results, final Long electionId) {
+        for (Candidate candidate : candidates) {
+            if (candidate.hasElectionId(electionId)) {
+                results.add(new ResultPerCandidate(candidate.getId(), candidate.getName(), candidate.getFaction(), 0L));
             }
         }
+    }
 
-        if (!found) {
-            results.add(new ResultPerCandidate(candidate.getId(), candidate.getName(), candidate.getFaction(), 1L));
+    private void countVotes(final List<Vote> votes, final List<ResultPerCandidate> results, final Long electionId) {
+        for (ResultPerCandidate candidate : results) {
+            for (Vote vote : votes) {
+                if (vote.hasElectionId(electionId) && vote.hasCandidateId(candidate.getCandidateId())) {
+                    candidate.countVote();
+                }
+            }
         }
     }
 }

@@ -1,9 +1,11 @@
 package nl.hu.cisq2.hupol.results.application;
 
+import nl.hu.cisq2.hupol.candidates.application.CandidateService;
 import nl.hu.cisq2.hupol.candidates.domain.Candidate;
 import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
 import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
+import nl.hu.cisq2.hupol.votes.application.VoteService;
 import nl.hu.cisq2.hupol.votes.data.VoteRepository;
 import nl.hu.cisq2.hupol.votes.domain.Vote;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +42,7 @@ class ResultServiceTest {
         when(candidateRepository.findAll()).thenReturn(CANDIDATES);
         when(voteRepository.findAll()).thenReturn(VOTES);
 
-        var resultService = new ResultService(candidateRepository, voteRepository);
+        var resultService = new ResultService(new CandidateService(candidateRepository), new VoteService(voteRepository));
         var results = resultService.calculateResultsPerCandidate(1L);
 
         var expectedResults = List.of(
@@ -59,7 +61,7 @@ class ResultServiceTest {
         when(candidateRepository.findAll()).thenReturn(List.of());
         when(voteRepository.findAll()).thenReturn(List.of());
 
-        var resultService = new ResultService(candidateRepository, voteRepository);
+        var resultService = new ResultService(new CandidateService(candidateRepository), new VoteService(voteRepository));
         var results = resultService.calculateResultsPerCandidate(1L);
 
         var expectedResults = List.of();

@@ -1,5 +1,7 @@
 package nl.hu.cisq2.hupol.results.domain;
 
+import nl.hu.cisq2.hupol.votes.domain.Vote;
+
 import java.util.Objects;
 
 public class ResultPerCandidate {
