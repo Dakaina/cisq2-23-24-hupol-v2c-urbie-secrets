@@ -1,4 +1,4 @@
-package nl.hu.cisq2.hupol.candidates;
+package nl.hu.cisq2.hupol.candidates.controller;
 
 import nl.hu.cisq2.hupol.Fixture;
 import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;

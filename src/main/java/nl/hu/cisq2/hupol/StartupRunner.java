@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 public class StartupRunner implements CommandLineRunner {
     private final AdminService adminService;
 
-    public StartupRunner(AdminService adminService) {
+    public StartupRunner(final AdminService adminService) {
         this.adminService = adminService;
     }
 
     @Override
-    public void run(String... args) {
-        String username = "admin";
-        String password = "topsecretpasswordforadmin";
+    public void run(final String... args) {
+        final String username = "admin";
+        final String password = "topsecretpasswordforadmin";
 
         this.adminService.registerNewUserAsAdmin(username, password);
     }

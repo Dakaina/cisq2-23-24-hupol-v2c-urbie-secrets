@@ -1,4 +1,4 @@
-package nl.hu.cisq2.hupol.votes;
+package nl.hu.cisq2.hupol.votes.controller;
 
 import nl.hu.cisq2.hupol.Fixture;
 import nl.hu.cisq2.hupol.votes.data.VoteRepository;

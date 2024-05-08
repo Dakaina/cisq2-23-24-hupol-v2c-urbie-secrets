@@ -33,7 +33,7 @@ public class ResultControllerIntegrationTest {
     void getElectionResults() throws Exception {
         Mockito.when(service.calculateResultsPerCandidate(0L))
                 .thenReturn(List.of(
-                        new ResultDTO(new ResultPerCandidate("32id123", "name", "faction", 1000L))
+                        new ResultDTO("32id123", "name", "faction", 1000L)
                 ));
 
         var request = get("/election/0/results")

@@ -10,11 +10,18 @@ public class ResultDTO {
     private final String faction;
     private Long votes;
 
-    public ResultDTO(ResultPerCandidate resultPerCandidate){
+    public ResultDTO(final ResultPerCandidate resultPerCandidate){
         this.candidateId = resultPerCandidate.getCandidateId();
         this.candidateName = resultPerCandidate.getCandidateName();
         this.faction = resultPerCandidate.getFaction();
         this.votes = resultPerCandidate.getVotes();
+    }
+
+    public ResultDTO(final String candidateId, final String candidateName, final String faction, final Long votes){
+        this.candidateId = candidateId;
+        this.candidateName = candidateName;
+        this.faction = faction;
+        this.votes = votes;
     }
 
     public String getCandidateId() {
