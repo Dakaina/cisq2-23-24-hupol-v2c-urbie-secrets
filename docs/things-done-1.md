@@ -8,6 +8,7 @@ pmd:
     Veel kleine/onduidelijke variabele namen verbeterd door heel het document heen
     Veel ander fixes zoals finals toevoegen, complexity verminderen, return statements aanpassen
     Variabele naam id en klasse naam Vote is 'te klein' maar erin gelaten omdat het een extreem duidelijk naam is bij de plekken waar het hoort. We hebben het ook niet geexclude in de pmd-complexity-analysis.xml sinds we dan alle short variables excluden en dat willen we liever weer niet	
+    CSVParser heeft een constructor nodig maar constructor mag niet leeg zijn dus dilemma, ook niet excluded want bij andere klassen willen we dat graag nog weten.
 
 build.yml:
 
