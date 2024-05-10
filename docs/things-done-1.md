@@ -19,7 +19,7 @@ build.yml:
 
     Interface voor parser (FileParser.java) en implementatie ervan voor CSV (CSVParser.java) gemaakt
     Gebruik gemaakt van streams in FileParser.java om snel/gemakkelijk te filteren, splitten en te mappen als objecten
-
+    Parser hulp via: https://www.baeldung.com/java-generics
 
 /candidates + /votes:
 
