@@ -8,7 +8,7 @@ public class ResultDTO {
     private final String candidateId;
     private final String candidateName;
     private final String faction;
-    private Long votes;
+    private final Long votes;
 
     public ResultDTO(final ResultPerCandidate resultPerCandidate){
         this.candidateId = resultPerCandidate.getCandidateId();

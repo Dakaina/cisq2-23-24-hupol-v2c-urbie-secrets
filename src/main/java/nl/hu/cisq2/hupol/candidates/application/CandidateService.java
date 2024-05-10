@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @Transactional
 public class CandidateService {
-    private CandidateRepository candidateRepository;
+    private final CandidateRepository candidateRepository;
 
     public CandidateService(final CandidateRepository candidateRepository){
         this.candidateRepository = candidateRepository;

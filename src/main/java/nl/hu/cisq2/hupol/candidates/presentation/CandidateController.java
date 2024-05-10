@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 
 @RestController
 public class CandidateController {
-    private CandidateService candidateService;
+    private final CandidateService candidateService;
 
     public CandidateController(final CandidateService candidateService) {
         this.candidateService = candidateService;
