@@ -1,13 +1,10 @@
 package nl.hu.cisq2.hupol.results.application;
 
-import nl.hu.cisq2.hupol.candidates.application.CandidateService;
-import nl.hu.cisq2.hupol.candidates.domain.Candidate;
-import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
-import nl.hu.cisq2.hupol.results.application.dto.ResultDTO;
+import nl.hu.cisq2.hupol.candidates.Candidate;
+import nl.hu.cisq2.hupol.candidates.Repo;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
-import nl.hu.cisq2.hupol.votes.application.VoteService;
-import nl.hu.cisq2.hupol.votes.data.VoteRepository;
-import nl.hu.cisq2.hupol.votes.domain.Vote;
+import nl.hu.cisq2.hupol.votes.VRepo;
+import nl.hu.cisq2.hupol.votes.Vote;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -37,17 +34,17 @@ class ResultServiceTest {
     @Test
     @DisplayName("produce results per candidate")
     void resultsPerCandidate() {
-        var candidateRepository = Mockito.mock(CandidateRepository.class);
-        var voteRepository = Mockito.mock(VoteRepository.class);
+        var candidateRepository = Mockito.mock(Repo.class);
+        var voteRepository = Mockito.mock(VRepo.class);
         when(candidateRepository.findAll()).thenReturn(CANDIDATES);
         when(voteRepository.findAll()).thenReturn(VOTES);
 
-        var resultService = new ResultService(new CandidateService(candidateRepository), new VoteService(voteRepository));
+        var resultService = new ResultService(candidateRepository, voteRepository);
         var results = resultService.calculateResultsPerCandidate(1L);
 
         var expectedResults = List.of(
-                new ResultDTO(new ResultPerCandidate("c1", "candidate1", "faction1", 2L)),
-                new ResultDTO(new ResultPerCandidate("c3", "candidate3", "faction2", 1L))
+                new ResultPerCandidate("c1", "candidate1", "faction1", 2L),
+                new ResultPerCandidate("c3", "candidate3", "faction2", 1L)
         );
 
         expectedResults.forEach(expected -> assertTrue(results.contains(expected)));
@@ -56,12 +53,12 @@ class ResultServiceTest {
     @Test
     @DisplayName("empty results if no candidates in election")
     void emptyResults() {
-        var candidateRepository = Mockito.mock(CandidateRepository.class);
-        var voteRepository = Mockito.mock(VoteRepository.class);
+        var candidateRepository = Mockito.mock(Repo.class);
+        var voteRepository = Mockito.mock(VRepo.class);
         when(candidateRepository.findAll()).thenReturn(List.of());
         when(voteRepository.findAll()).thenReturn(List.of());
 
-        var resultService = new ResultService(new CandidateService(candidateRepository), new VoteService(voteRepository));
+        var resultService = new ResultService(candidateRepository, voteRepository);
         var results = resultService.calculateResultsPerCandidate(1L);
 
         var expectedResults = List.of();

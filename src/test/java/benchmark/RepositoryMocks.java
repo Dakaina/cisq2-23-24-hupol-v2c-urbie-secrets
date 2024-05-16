@@ -1,9 +1,9 @@
 package benchmark;
 
-import nl.hu.cisq2.hupol.candidates.domain.Candidate;
-import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
-import nl.hu.cisq2.hupol.votes.data.VoteRepository;
-import nl.hu.cisq2.hupol.votes.domain.Vote;
+import nl.hu.cisq2.hupol.candidates.Candidate;
+import nl.hu.cisq2.hupol.candidates.Repo;
+import nl.hu.cisq2.hupol.votes.VRepo;
+import nl.hu.cisq2.hupol.votes.Vote;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
@@ -13,25 +13,25 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RepositoryMocks {
-    private static VoteRepository votesInstance = null;
-    private static CandidateRepository candidatesInstance = null;
+    private static VRepo votesInstance = null;
+    private static Repo candidatesInstance = null;
 
-    public static VoteRepository votes() {
+    public static VRepo votes() {
         if (votesInstance == null) {
             var allVotes = randomVotes();
 
-            votesInstance = Mockito.mock(VoteRepository.class);
+            votesInstance = Mockito.mock(VRepo.class);
             Mockito.when(votesInstance.findAll()).thenReturn(allVotes);
         }
 
         return votesInstance;
     }
 
-    public static CandidateRepository candidates() {
+    public static Repo candidates() {
         if (candidatesInstance == null) {
             var allCandidates = randomCandidates();
 
-            candidatesInstance = Mockito.mock(CandidateRepository.class);
+            candidatesInstance = Mockito.mock(Repo.class);
             Mockito.when(candidatesInstance.findAll()).thenReturn(allCandidates);
         }
 

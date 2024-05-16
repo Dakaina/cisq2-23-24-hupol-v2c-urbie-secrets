@@ -1,9 +1,6 @@
-package nl.hu.cisq2.hupol.candidates.controller;
+package nl.hu.cisq2.hupol.candidates;
 
 import nl.hu.cisq2.hupol.Fixture;
-import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
-import nl.hu.cisq2.hupol.candidates.domain.Candidate;
-import nl.hu.cisq2.hupol.candidates.presentation.CandidateController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,12 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class candidateControllerIntegrationTest {
+class candidatesIntegrationTest {
     @Autowired
-    private CandidateRepository candidateRepository;
+    private Repo candidateRepository;
 
     @Autowired
-    private CandidateController candidateController;
+    private candidates candidateController;
 
     @Test
     @DisplayName("import a list of candidates")
@@ -39,7 +36,7 @@ class candidateControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("candidates-01.csv", input.getBytes());
 
         // When we import the file
-        candidateController.importCandidates(file);
+        candidateController.Importcandidatelist(file);
 
         // Then the candidates in that file should show up in the database
         var allCandidates = candidateRepository.findAll();
@@ -63,7 +60,7 @@ class candidateControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("file.csv", input.getBytes());
 
         // When we import that poorly formatted file
-        Executable action = () -> candidateController.importCandidates(file);
+        Executable action = () -> candidateController.Importcandidatelist(file);
 
         // Then we should get a ResponseStatusException
         var exception = assertThrows(ResponseStatusException.class, action);
@@ -80,7 +77,7 @@ class candidateControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("file.csv", input.getBytes());
 
         // When we import that poorly formatted file
-        Executable action = () -> candidateController.importCandidates(file);
+        Executable action = () -> candidateController.Importcandidatelist(file);
 
         // Then we should get a ResponseStatusException
         var exception = assertThrows(ResponseStatusException.class, action);
@@ -97,7 +94,7 @@ class candidateControllerIntegrationTest {
         Mockito.when(file.getBytes()).thenThrow(new IOException());
 
         // When we import the file
-        Executable action = () -> candidateController.importCandidates(file);
+        Executable action = () -> candidateController.Importcandidatelist(file);
 
         // Then we expect the correct error
         var exception = assertThrows(ResponseStatusException.class, action);

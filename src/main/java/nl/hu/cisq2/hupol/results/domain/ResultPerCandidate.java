@@ -1,6 +1,5 @@
 package nl.hu.cisq2.hupol.results.domain;
 
-
 import java.util.Objects;
 
 public class ResultPerCandidate {
@@ -9,7 +8,7 @@ public class ResultPerCandidate {
     private final String faction;
     private Long votes;
 
-    public ResultPerCandidate(final String candidateId, final String candidateName, final String faction, final Long votes) {
+    public ResultPerCandidate(String candidateId, String candidateName, String faction, Long votes) {
         this.candidateId = candidateId;
         this.candidateName = candidateName;
         this.faction = faction;
@@ -20,7 +19,7 @@ public class ResultPerCandidate {
         this.votes++;
     }
 
-    public boolean isForCandidate(final String id) {
+    public boolean isForCandidate(String id) {
         return this.candidateId.equals(id);
     }
 
@@ -41,19 +40,10 @@ public class ResultPerCandidate {
     }
 
     @Override
-    public boolean equals(final Object object) {
-        boolean result = false;
-
-        if (this == object) {
-            result = true;
-        }
-        else if (object instanceof ResultPerCandidate that) {
-            result = Objects.equals(candidateId, that.candidateId) &&
-                    Objects.equals(candidateName, that.candidateName) &&
-                    Objects.equals(faction, that.faction) &&
-                    Objects.equals(votes, that.votes);
-        }
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ResultPerCandidate that)) return false;
+        return Objects.equals(candidateId, that.candidateId) && Objects.equals(candidateName, that.candidateName) && Objects.equals(faction, that.faction) && Objects.equals(votes, that.votes);
     }
 
     @Override

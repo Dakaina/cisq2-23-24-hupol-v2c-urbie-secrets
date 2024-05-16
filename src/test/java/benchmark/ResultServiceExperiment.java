@@ -1,10 +1,10 @@
 package benchmark;
 
-import nl.hu.cisq2.hupol.candidates.domain.Candidate;
-import nl.hu.cisq2.hupol.candidates.data.CandidateRepository;
+import nl.hu.cisq2.hupol.candidates.Candidate;
+import nl.hu.cisq2.hupol.candidates.Repo;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
-import nl.hu.cisq2.hupol.votes.data.VoteRepository;
-import nl.hu.cisq2.hupol.votes.domain.Vote;
+import nl.hu.cisq2.hupol.votes.VRepo;
+import nl.hu.cisq2.hupol.votes.Vote;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import java.util.List;
 
 @Service
 public class ResultServiceExperiment {
-    private final CandidateRepository candidatesRepository;
-    private final VoteRepository votesRepository;
+    private final Repo candidatesRepository;
+    private final VRepo votesRepository;
 
-    public ResultServiceExperiment(CandidateRepository candidatesRepository, VoteRepository votesRepository) {
+    public ResultServiceExperiment(Repo candidatesRepository, VRepo votesRepository) {
         this.candidatesRepository = candidatesRepository;
         this.votesRepository = votesRepository;
     }
@@ -36,7 +36,7 @@ public class ResultServiceExperiment {
                     continue;
                 }
 
-                if (vote.hasCandidateId(candidate.getId())) {
+                if (vote.isForCandidate(candidate.getCandidateId())) {
                     this.countVoteForCandidate(candidate, results);
                 }
             }
@@ -49,7 +49,7 @@ public class ResultServiceExperiment {
         boolean found = false;
 
         for (ResultPerCandidate result : results) {
-            if (result.isForCandidate(candidate.getId())) {
+            if (result.isForCandidate(candidate.getCandidateId())) {
                 result.countVote();
                 found = true;
                 break;
@@ -57,7 +57,7 @@ public class ResultServiceExperiment {
         }
 
         if (!found) {
-            results.add(new ResultPerCandidate(candidate.getId(), candidate.getName(), candidate.getFaction(), 1L));
+            results.add(new ResultPerCandidate(candidate.getCandidateId(), candidate.getName(), candidate.getFaction(), 1L));
         }
     }
 }

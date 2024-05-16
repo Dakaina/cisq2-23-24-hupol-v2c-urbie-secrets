@@ -1,9 +1,6 @@
-package nl.hu.cisq2.hupol.votes.controller;
+package nl.hu.cisq2.hupol.votes;
 
 import nl.hu.cisq2.hupol.Fixture;
-import nl.hu.cisq2.hupol.votes.data.VoteRepository;
-import nl.hu.cisq2.hupol.votes.domain.Vote;
-import nl.hu.cisq2.hupol.votes.presentation.VoteController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,12 +22,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class voteControllerIntegrationTest {
+class controllerIntegrationTest {
     @Autowired
-    private VoteRepository voteRepository;
+    private VRepo voteRepository;
 
     @Autowired
-    private VoteController voteController;
+    private controller voteController;
 
     @Test
     @DisplayName("import a list of votes")
@@ -40,7 +37,7 @@ class voteControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("votes-01.csv", input.getBytes());
 
         // When we import the file
-        voteController.importVotes(file);
+        voteController.importtvotes(file);
 
         // Then the votes in that file should show up in the database
         var allVotes = voteRepository.findAll();
@@ -64,7 +61,7 @@ class voteControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("file.csv", input.getBytes());
 
         // When we import that poorly formatted file
-        Executable action = () -> voteController.importVotes(file);
+        Executable action = () -> voteController.importtvotes(file);
 
         // Then we should get a ResponseStatusException
         var exception = assertThrows(ResponseStatusException.class, action);
@@ -81,7 +78,7 @@ class voteControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("file.csv", input.getBytes());
 
         // When we import that poorly formatted file
-        Executable action = () -> voteController.importVotes(file);
+        Executable action = () -> voteController.importtvotes(file);
 
         // Then we should get a ResponseStatusException
         var exception = assertThrows(ResponseStatusException.class, action);
@@ -98,7 +95,7 @@ class voteControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("file.csv", input.getBytes());
 
         // When we import that poorly formatted file
-        Executable action = () -> voteController.importVotes(file);
+        Executable action = () -> voteController.importtvotes(file);
 
         // Then we should get a ResponseStatusException
         var exception = assertThrows(ResponseStatusException.class, action);
@@ -115,7 +112,7 @@ class voteControllerIntegrationTest {
         MultipartFile file = new MockMultipartFile("file.csv", input.getBytes());
 
         // When we import that poorly formatted file
-        Executable action = () -> voteController.importVotes(file);
+        Executable action = () -> voteController.importtvotes(file);
 
         // Then we should get a ResponseStatusException
         var exception = assertThrows(ResponseStatusException.class, action);
@@ -132,7 +129,7 @@ class voteControllerIntegrationTest {
         Mockito.when(file.getBytes()).thenThrow(new IOException());
 
         // When we import the file
-        Executable action = () -> voteController.importVotes(file);
+        Executable action = () -> voteController.importtvotes(file);
 
         // Then we expect the correct error
         var exception = assertThrows(ResponseStatusException.class, action);
