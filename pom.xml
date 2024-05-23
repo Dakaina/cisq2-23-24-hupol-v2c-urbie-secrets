@@ -94,6 +94,24 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>secrets.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>io.snyk</groupId>
 				<artifactId>snyk-maven-plugin</artifactId>
 				<version>2.2.0</version>
@@ -113,7 +131,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<apiToken>HAHAHA GEEN TOKEN</apiToken>
+					<apiToken>${snyk}</apiToken>
 					<args>
 						<arg>--all-projects</arg>
 					</args>
