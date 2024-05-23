@@ -1,0 +1,37 @@
+Wat vinden wij:
+User's password is being saved as plain text
+No role based authorization checks at any controller method (so you can promote users to admins and the other way around while being a user)
+Bij promoten/demoten van/naar admin wordt username doorgegeven via url inplaats van parameter
+Alle soort input kan doorkomen, er is geen whitelist en validation.
+Er is alleen 1 factor authentication
+JWT token timeout duurt te lang, jwt token is nu 10 dagen geldig
+Alle type wachtwoorden worden toegelaten (zwakke, bekende, te weinig characters)
+Verdachte login pogingen/belangrijke transacties worden niet gelogd
+XML bestand voor import candidates/votes kan misbruikt worden wegens accepteren van untrusted xml files
+Pom dependencies niet up to date
+Geen entity java objecten sturen maar dto's
+Ongebruikte dependencies op plekken.
+Inlog check wachtwoord via equals methode
+geen salting/peppering van wachtwoord
+application.properties bevat inlogdata voor database en meer
+JWT secret verandert nooit
+vaak this.secret = secret inplaats van alleen uit property file halen
+
+
+Wat vind snyk:
+Update org.springframework.boot:spring-boot-starter-web van 3.2.3 naar 3.2.5
+Update org.springframework.security:spring-security-test van 6.2.2 naar 6.2.3
+Improper access control in org.springramework.security
+Remote code execution in com.h2database
+Use of hardcoded credentials in code (AuthenticationControllerWebTest line 44)
+Use of hardcoded credentials in code (AuthenticationControllerWebTest line 45)
+Use of hardcoded credentials in code (AuthenticationControllerWebTest line 62)
+Use of hardcoded credentials in code (AuthenticationControllerWebTest line 63)
+Use of hardcoded credentials in code (StartupRunner.java line 18)
+Use of hardcoded credentials in code (StartupRunner.java line 19)
+Use of password hash with insufficient computational effort (/fakedatagenerator/index.js line 13)
+Unprotected storage of credentials (AuthenticationService.java line 26)
+Request forgery (SecurityConfig.java line 50)
+
+
+

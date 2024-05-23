@@ -1,0 +1,5 @@
+gedaan:
+
+snyk api hidden in git ignored secrets.properties
+java version van 17 naar 21
+org.springframework.boot version van 3.2.3 naar 3.2.5
