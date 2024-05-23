@@ -15,7 +15,7 @@ Inlog check wachtwoord via equals methode*gefixt door PasswordEncoder matcher*
 geen salting van wachtwoord*PasswordEncoder BCrypt gebruikt salting*
 geen peppering van wachtwoord
 application.properties bevat inlogdata voor database en meer
-JWT secret verandert nooit
+JWT secret basic
 vaak this.secret = secret inplaats van alleen uit property file halen
 er wordt geregistreerd op 2 punten (verschillend admin en user)
 Hardcoded credentials zijn te makkelijk te raden
@@ -24,7 +24,7 @@ Hardcoded credentials zijn te makkelijk te raden
 Wat vind snyk:
 Update org.springframework.boot:spring-boot-starter-web van 3.2.3 naar 3.2.5 *
 Update org.springframework.security:spring-security-test van 6.2.2 naar 6.2.3 *
-Improper access control in org.springramework.security
+Improper access control in org.springramework.security*verdwenen bij update van dependencies*
 Remote code execution in com.h2database *niettefixen*
 Use of hardcoded credentials in code (AuthenticationControllerWebTest line 44)
 Use of hardcoded credentials in code (AuthenticationControllerWebTest line 45)
@@ -32,9 +32,9 @@ Use of hardcoded credentials in code (AuthenticationControllerWebTest line 62)
 Use of hardcoded credentials in code (AuthenticationControllerWebTest line 63)
 Use of hardcoded credentials in code (StartupRunner.java line 18)
 Use of hardcoded credentials in code (StartupRunner.java line 19)
-Use of password hash with insufficient computational effort (/fakedatagenerator/index.js line 13) *ake data dus hoeft niet verbeterd te worden*
+Use of password hash with insufficient computational effort (/fakedatagenerator/index.js line 13) *md5 naar sha256*
 Unprotected storage of credentials (AuthenticationService.java line 26)*gefixt met encoder *
-Request forgery (SecurityConfig.java line 50)
+Request forgery (SecurityConfig.java line 50)*verdwenen*
 
 
 

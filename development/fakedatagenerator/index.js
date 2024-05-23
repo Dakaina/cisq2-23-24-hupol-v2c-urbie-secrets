@@ -10,7 +10,7 @@ const OUTPUT_DIR = `${__dirname}/../db/examples`;
 const CANDIDATES_FILE = `${OUTPUT_DIR}/candidates.csv`;
 const VOTES_FILE = `${OUTPUT_DIR}/votes.csv`;
 
-const makeId = (input) => crypto.createHash('md5').update(input).digest("hex").slice(0, 8);
+const makeId = (input) => crypto.createHash('sha256').update(input).digest("hex").slice(0, 8);
 
 const martianRegions = [
     'Aeolis',
