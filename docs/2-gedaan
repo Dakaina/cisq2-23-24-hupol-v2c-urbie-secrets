@@ -5,4 +5,5 @@ java version van 17 naar 21
 org.springframework.boot version van 3.2.3 naar 3.2.5
 Bij het aanmaken van accounts wordt er gebruik gemaakt van PasswordEncoder voor encoding en salting
 Bij het inloggen wordt er inplaats van .equals methode nu gemaakt van PasswordsEncoder's matcher functie
-Bij het registreren van een user wordt er gebruik gemaakt van CredentialChecker die checkt of een wachtwoord te zwak is
+Bij het registreren van een user wordt er gebruik gemaakt van @Size en @Pattern regex die requirements checkt bij input dto
+

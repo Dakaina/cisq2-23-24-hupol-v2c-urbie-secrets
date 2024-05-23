@@ -5,18 +5,20 @@ Bij promoten/demoten van/naar admin wordt username doorgegeven via url inplaats 
 Alle soort input kan doorkomen, er is geen whitelist en validation.
 Er is alleen 1 factor authentication
 JWT token timeout duurt te lang, jwt token is nu 10 dagen geldig, refreshing jwt token misschien?
-Alle type wachtwoorden worden toegelaten (zwakke, bekende, te weinig characters)
+Alle type wachtwoorden worden toegelaten (zwakke, bekende, te weinig characters)*er is nu een requirement checker*
 Verdachte login pogingen/belangrijke transacties worden niet gelogd
 XML bestand voor import candidates/votes kan misbruikt worden wegens accepteren van untrusted xml files
-Pom dependencies niet up to date *
+Pom dependencies niet up to date *geupdate*
 Geen entity java objecten sturen maar dto's
 Ongebruikte dependencies op plekken.
-Inlog check wachtwoord via equals methode
-geen salting/peppering van wachtwoord
+Inlog check wachtwoord via equals methode*gefixt door PasswordEncoder matcher*
+geen salting van wachtwoord*PasswordEncoder BCrypt gebruikt salting*
+geen peppering van wachtwoord
 application.properties bevat inlogdata voor database en meer
 JWT secret verandert nooit
 vaak this.secret = secret inplaats van alleen uit property file halen
 er wordt geregistreerd op 2 punten (verschillend admin en user)
+Hardcoded credentials zijn te makkelijk te raden
 
 
 Wat vind snyk:
@@ -30,8 +32,8 @@ Use of hardcoded credentials in code (AuthenticationControllerWebTest line 62)
 Use of hardcoded credentials in code (AuthenticationControllerWebTest line 63)
 Use of hardcoded credentials in code (StartupRunner.java line 18)
 Use of hardcoded credentials in code (StartupRunner.java line 19)
-Use of password hash with insufficient computational effort (/fakedatagenerator/index.js line 13)
-Unprotected storage of credentials (AuthenticationService.java line 26)
+Use of password hash with insufficient computational effort (/fakedatagenerator/index.js line 13) *ake data dus hoeft niet verbeterd te worden*
+Unprotected storage of credentials (AuthenticationService.java line 26)*gefixt met encoder *
 Request forgery (SecurityConfig.java line 50)
 
 
