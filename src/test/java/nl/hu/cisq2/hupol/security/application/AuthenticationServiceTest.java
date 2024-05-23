@@ -12,6 +12,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,10 @@ class AuthenticationServiceTest {
         Mockito.when(repository.findById(username))
                 .thenReturn(Optional.of(user));
 
-        var service = new AuthenticationService(repository);
+        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        Mockito.when(passwordEncoder.matches(password, password)).thenReturn(true);
+
+        var service = new AuthenticationService(repository, passwordEncoder);
         UserProfile profile = service.login(username, password);
 
         List<String> profileRoles = profile.authorities()
@@ -55,7 +59,9 @@ class AuthenticationServiceTest {
         Mockito.when(repository.findById(Mockito.anyString()))
                 .thenReturn(Optional.empty());
 
-        var service = new AuthenticationService(repository);
+        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+
+        var service = new AuthenticationService(repository, passwordEncoder);
         Executable action = () -> service.login("username", "password");
 
         assertThrows(BadCredentialsException.class, action);
@@ -73,7 +79,10 @@ class AuthenticationServiceTest {
         Mockito.when(repository.findById(username))
                 .thenReturn(Optional.of(user));
 
-        var service = new AuthenticationService(repository);
+        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        Mockito.when(passwordEncoder.matches(password, password)).thenReturn(false);
+
+        var service = new AuthenticationService(repository, passwordEncoder);
         Executable action = () -> service.login(username, "wrong!");
 
         assertThrows(BadCredentialsException.class, action);
@@ -91,7 +100,9 @@ class AuthenticationServiceTest {
         Mockito.when(repository.existsById(username))
                 .thenReturn(false);
 
-        var service = new AuthenticationService(repository);
+        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+
+        var service = new AuthenticationService(repository, passwordEncoder);
         service.register(username, password);
 
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
@@ -107,7 +118,9 @@ class AuthenticationServiceTest {
         Mockito.when(repository.existsById("username"))
                 .thenReturn(true);
 
-        var service = new AuthenticationService(repository);
+        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+
+        var service = new AuthenticationService(repository, passwordEncoder);
         Executable action = () -> service.register("username", "password");
 
         assertThrows(UserAlreadyExists.class, action);

@@ -3,3 +3,5 @@ gedaan:
 snyk api hidden in git ignored secrets.properties
 java version van 17 naar 21
 org.springframework.boot version van 3.2.3 naar 3.2.5
+Bij het aanmaken van accounts wordt er gebruik gemaakt van PasswordEncoder voor hashing en salting
+Bij het inloggen wordt er inplaats van .equals methode nu gemaakt van PasswordsEncoder's matcher functie
