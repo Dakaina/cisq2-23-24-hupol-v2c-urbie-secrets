@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
@@ -46,9 +47,10 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected SecurityFilterChain filterChain(final HttpSecurity http, final AuthenticationService authenticationService, final AuthenticationManager authenticationManager) throws Exception {
-        http.cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
+    protected SecurityFilterChain filterChain(final HttpSecurity http, final AuthenticationService authenticationService, final AuthenticationManager authenticationManager) throws Exception {http
+                .cors(Customizer.withDefaults())
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(antMatcher(POST, REGISTER_PATH)).permitAll()
                         .requestMatchers(antMatcher(POST, LOGIN_PATH)).permitAll()
@@ -63,6 +65,7 @@ public class SecurityConfig {
                 ), UsernamePasswordAuthenticationFilter.class)
                 .addFilter(new JwtAuthorizationFilter(jwtSecret, authenticationManager))
                 .sessionManagement(s -> s.sessionCreationPolicy(STATELESS));
+
         return http.build();
     }
 
