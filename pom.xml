@@ -93,6 +93,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>io.snyk</groupId>
+				<artifactId>snyk-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<inherited>false</inherited>
+				<executions>
+					<execution>
+						<id>snyk-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>snyk-monitor</id>
+						<goals>
+							<goal>monitor</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<apiToken>7d6eb57e-6673-4c30-83b8-5e0eda7a66c3</apiToken>
+					<args>
+						<arg>--all-projects</arg>
+					</args>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
