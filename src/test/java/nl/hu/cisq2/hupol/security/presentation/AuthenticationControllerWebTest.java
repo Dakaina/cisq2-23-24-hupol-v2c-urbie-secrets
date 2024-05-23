@@ -42,7 +42,7 @@ public class AuthenticationControllerWebTest {
     @DisplayName("register")
     public void register() throws Exception {
         String username = "testuser";
-        String password = "testpassword";
+        String password = "ABcd12!@admin";
 
         String jsonBody = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password);
 
@@ -60,7 +60,7 @@ public class AuthenticationControllerWebTest {
     @DisplayName("cannot register if user exists")
     public void cannotRegister() throws Exception {
         String username = "testuser";
-        String password = "testpassword";
+        String password = "ABcd12!@admin";
 
         String jsonBody = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password);
 
@@ -79,11 +79,11 @@ public class AuthenticationControllerWebTest {
     @DisplayName("promote admin")
     public void promoteAdmin() throws Exception {
         // Given an admin and a user
-        adminService.registerNewUserAsAdmin("admin", "admin");
-        authService.register("testuser", "testuser");
+        adminService.registerNewUserAsAdmin("admin", "ABcd12!@admin");
+        authService.register("testuser", "ABcd12!@admin");
 
         // When we are logged in as admin
-        String loginBody = "{\"username\": \"admin\", \"password\": \"admin\"}";
+        String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(loginBody);
@@ -102,7 +102,7 @@ public class AuthenticationControllerWebTest {
 
         // And the user has the correct role
         var roles = authService
-                .login("testuser", "testuser")
+                .login("testuser", "ABcd12!@admin")
                 .authorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority).toList();
@@ -114,10 +114,10 @@ public class AuthenticationControllerWebTest {
     @DisplayName("cannot promote if user not found")
     public void cannotPromoteIfNotFound() throws Exception {
         // Given an admin and no user
-        adminService.registerNewUserAsAdmin("admin", "admin");
+        adminService.registerNewUserAsAdmin("admin", "ABcd12!@admin");
 
         // When we are logged in as admin
-        String loginBody = "{\"username\": \"admin\", \"password\": \"admin\"}";
+        String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(loginBody);
@@ -139,11 +139,11 @@ public class AuthenticationControllerWebTest {
     @DisplayName("demote admin")
     public void demoteAdmin() throws Exception {
         // Given two admins
-        adminService.registerNewUserAsAdmin("admin", "admin");
-        adminService.registerNewUserAsAdmin("testuser", "testuser");
+        adminService.registerNewUserAsAdmin("admin", "ABcd12!@admin");
+        adminService.registerNewUserAsAdmin("testuser", "ABcd12!@admin");
 
         // When we are logged in as admin
-        String loginBody = "{\"username\": \"admin\", \"password\": \"admin\"}";
+        String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(loginBody);
@@ -162,7 +162,7 @@ public class AuthenticationControllerWebTest {
 
         // And the user has the correct role
         var roles = authService
-                .login("testuser", "testuser")
+                .login("testuser", "ABcd12!@admin")
                 .authorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority).toList();
@@ -174,10 +174,10 @@ public class AuthenticationControllerWebTest {
     @DisplayName("cannot demote if user not found")
     public void cannotDemoteIfNotFound() throws Exception {
         // Given an admin and no user
-        adminService.registerNewUserAsAdmin("admin", "admin");
+        adminService.registerNewUserAsAdmin("admin", "ABcd12!@admin");
 
         // When we are logged in as admin
-        String loginBody = "{\"username\": \"admin\", \"password\": \"admin\"}";
+        String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(loginBody);

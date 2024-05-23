@@ -1,11 +1,13 @@
 package nl.hu.cisq2.hupol.security.application;
 
 import jakarta.transaction.Transactional;
+import nl.hu.cisq2.hupol.security.application.exception.PasswordRequirementsNotMet;
 import nl.hu.cisq2.hupol.security.data.UserRepository;
 import nl.hu.cisq2.hupol.security.domain.Role;
 import nl.hu.cisq2.hupol.security.domain.User;
 import nl.hu.cisq2.hupol.security.domain.UserProfile;
 import nl.hu.cisq2.hupol.security.domain.exception.UserAlreadyExists;
+import nl.hu.cisq2.hupol.security.util.CredentialChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -43,6 +45,9 @@ public class AuthenticationService implements UserDetailsService {
     public UserProfile register(String username, String password) {
         if (this.userRepository.existsById(username)) {
             throw new UserAlreadyExists();
+        }
+        if (!CredentialChecker.satisfiesPasswordRequirements(password)){
+            throw new PasswordRequirementsNotMet();
         }
 
         List<Role> roles = new ArrayList<>();

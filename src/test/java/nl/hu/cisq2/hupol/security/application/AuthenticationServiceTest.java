@@ -92,7 +92,7 @@ class AuthenticationServiceTest {
     @DisplayName("user can register an account")
     void registration() {
         String username = "username";
-        String password = "password";
+        String password = "ABcd12!@admin";
         List<Role> roles = List.of(Role.ROLE_USER);
         var user = new User(username, password, roles);
 
@@ -121,7 +121,7 @@ class AuthenticationServiceTest {
         var passwordEncoder = Mockito.mock(PasswordEncoder.class);
 
         var service = new AuthenticationService(repository, passwordEncoder);
-        Executable action = () -> service.register("username", "password");
+        Executable action = () -> service.register("username", "ABcd12!@admin");
 
         assertThrows(UserAlreadyExists.class, action);
     }
