@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,10 +28,10 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true)
 @Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
     private final static String LOGIN_PATH = "/auth/login";
     private final static String REGISTER_PATH = "/auth/register";
-    private final static String ADMIN_PATH = "/auth/admin";
 
     @Value("${security.jwt.secret}")
     private String jwtSecret;
@@ -54,7 +55,6 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher(POST, REGISTER_PATH)).permitAll()
                         .requestMatchers(antMatcher(POST, LOGIN_PATH)).permitAll()
                         .requestMatchers(antMatcher("/error")).anonymous()
-                        .requestMatchers(antMatcher(POST, ADMIN_PATH)).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(

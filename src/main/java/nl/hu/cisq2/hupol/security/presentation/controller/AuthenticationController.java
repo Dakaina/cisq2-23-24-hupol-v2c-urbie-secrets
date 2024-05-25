@@ -8,6 +8,7 @@ import nl.hu.cisq2.hupol.security.domain.exception.UserNotFound;
 import nl.hu.cisq2.hupol.security.presentation.dto.AdminRequest;
 import nl.hu.cisq2.hupol.security.presentation.dto.RegisterRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,6 +34,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("admin")
+    @Secured("ROLE_ADMIN")
     public void promoteAdmin(@Validated @RequestBody AdminRequest credential) {
         try {
             this.adminService.promote(credential.username);
@@ -42,6 +44,7 @@ public class AuthenticationController {
     }
 
     @DeleteMapping("admin")
+    @Secured("ROLE_ADMIN")
     public void demoteAdmin(@Validated @RequestBody AdminRequest credential) {
         try {
             this.adminService.demote(credential.username);

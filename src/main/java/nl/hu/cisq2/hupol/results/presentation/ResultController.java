@@ -2,6 +2,7 @@ package nl.hu.cisq2.hupol.results.presentation;
 
 import nl.hu.cisq2.hupol.results.application.ResultService;
 import nl.hu.cisq2.hupol.results.domain.ResultPerCandidate;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ public class ResultController {
     }
 
     @GetMapping("/election/{electionId}/results")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public List<ResultPerCandidate> getResultsPerCandidate(@PathVariable Long electionId) {
         return service.calculateResultsPerCandidate(electionId);
     }

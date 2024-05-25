@@ -1,6 +1,7 @@
 package nl.hu.cisq2.hupol.votes;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class controller {
     }
 
     @PostMapping("/votes")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public void importtvotes(@RequestParam("file") MultipartFile f) { // upload file in body form data
         try {
             if(f!=null && !f.isEmpty()) {

@@ -7,8 +7,7 @@ JWT token timeout duurt te lang, jwt token is nu 10 dagen geldig
 Alle type wachtwoorden worden toegelaten (zwakke, bekende, te weinig characters)*er is nu een requirement checker*
 Verdachte login pogingen/belangrijke transacties worden niet gelogd
 Pom dependencies niet up to date *geupdate*
-Geen entity java objecten sturen maar dto's
-Ongebruikte dependencies op plekken.
+Ongebruikte imports op plekken.
 Inlog check wachtwoord via equals methode*gefixt door PasswordEncoder matcher*
 geen salting van wachtwoord*PasswordEncoder BCrypt gebruikt salting*
 geen peppering van wachtwoord
@@ -17,7 +16,7 @@ JWT secret basic
 vaak this.secret = secret inplaats van alleen uit property file halen
 er wordt geregistreerd op 2 punten (verschillend admin en user)
 Hardcoded credentials zijn te makkelijk te raden
-geen uitloggen?
+docker compose yml inlogdata
 
 Wat vind snyk:
 Update org.springframework.boot:spring-boot-starter-web van 3.2.3 naar 3.2.5 *
