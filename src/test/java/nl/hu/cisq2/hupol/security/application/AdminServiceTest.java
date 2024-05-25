@@ -26,10 +26,14 @@ class AdminServiceTest {
     void createAdmin() {
         String username = "username";
         String password = "password";
+        List<Role> userrole = new ArrayList<>();
+        userrole.add(Role.ROLE_USER);
 
         var repository = Mockito.mock(UserRepository.class);
         Mockito.when(repository.existsById("username"))
                 .thenReturn(false);
+        Mockito.when(repository.findById("username"))
+                .thenReturn(Optional.of(new User("username", "password", userrole)));
 
         var authenticationService = Mockito.mock(AuthenticationService.class);
 
