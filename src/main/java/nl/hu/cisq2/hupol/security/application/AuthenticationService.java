@@ -21,6 +21,9 @@ import java.util.Properties;
 @Service
 @Transactional
 public class AuthenticationService implements UserDetailsService {
+    @Value("${secret.pepper}")
+    private String pepper;
+
     @Autowired
     private final UserRepository userRepository;
 
@@ -36,7 +39,7 @@ public class AuthenticationService implements UserDetailsService {
         User user = this.userRepository.findById(username)
                 .orElseThrow(() -> new BadCredentialsException("User not found"));
 
-        if (passwordEncoder.matches(password, user.getPassword())) {
+        if (passwordEncoder.matches(password + pepper, user.getPassword())) {
             return new UserProfile(user.getUsername(), user.getAuthorities());
         }
         throw new BadCredentialsException("Wrong password");
@@ -50,7 +53,7 @@ public class AuthenticationService implements UserDetailsService {
         List<Role> roles = new ArrayList<>();
         roles.add(Role.ROLE_USER);
 
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(password + pepper);
         User user = new User(username, encodedPassword, roles);
 
         this.userRepository.save(user);

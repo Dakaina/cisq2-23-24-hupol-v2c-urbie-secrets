@@ -34,7 +34,7 @@ class AuthenticationServiceTest {
                 .thenReturn(Optional.of(user));
 
         var passwordEncoder = Mockito.mock(PasswordEncoder.class);
-        Mockito.when(passwordEncoder.matches(password, password)).thenReturn(true);
+        Mockito.when(passwordEncoder.matches(Mockito.any(), Mockito.any())).thenReturn(true);
 
         var service = new AuthenticationService(repository, passwordEncoder);
         UserProfile profile = service.login(username, password);
