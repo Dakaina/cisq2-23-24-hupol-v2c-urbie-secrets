@@ -20,12 +20,13 @@ public class AdminService {
     @Value("${secret.pepper}")
     private String pepper;
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public AdminService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AdminService(UserRepository userRepository, AuthenticationService authenticationService) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.authenticationService = authenticationService;
     }
 
     public void registerNewUserAsAdmin(String username, String password) {
@@ -33,12 +34,8 @@ public class AdminService {
             return;
         }
 
-        List<Role> roles = new ArrayList<>();
-        roles.add(ROLE_USER);
-        roles.add(ROLE_ADMIN);
-        User user = new User(username, passwordEncoder.encode(password + pepper), roles);
-
-        this.userRepository.save(user);
+        this.authenticationService.register(username, password);
+        promote(username);
     }
 
     public void promote(String username) {

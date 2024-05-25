@@ -31,9 +31,9 @@ class AdminServiceTest {
         Mockito.when(repository.existsById("username"))
                 .thenReturn(false);
 
-        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        var authenticationService = Mockito.mock(AuthenticationService.class);
 
-        var service = new AdminService(repository, passwordEncoder);
+        var service = new AdminService(repository, authenticationService);
         service.registerNewUserAsAdmin(username, password);
 
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
@@ -57,9 +57,9 @@ class AdminServiceTest {
         Mockito.when(repository.existsById("username"))
                 .thenReturn(true);
 
-        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        var authenticationService = Mockito.mock(AuthenticationService.class);
 
-        var service = new AdminService(repository, passwordEncoder);
+        var service = new AdminService(repository, authenticationService);
         service.registerNewUserAsAdmin("username", "password");
 
         Mockito.verify(repository, Mockito.never()).save(Mockito.any());
@@ -76,9 +76,9 @@ class AdminServiceTest {
         Mockito.when(repository.findById("username"))
                 .thenReturn(Optional.of(user));
 
-        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        var authenticationService = Mockito.mock(AuthenticationService.class);
 
-        var service = new AdminService(repository, passwordEncoder);
+        var service = new AdminService(repository, authenticationService);
         service.promote("username");
 
         assertEquals(List.of(ROLE_USER, ROLE_ADMIN), user.getRoles());
@@ -91,9 +91,9 @@ class AdminServiceTest {
         Mockito.when(repository.findById("username"))
                 .thenReturn(Optional.empty());
 
-        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        var authenticationService = Mockito.mock(AuthenticationService.class);
 
-        var service = new AdminService(repository, passwordEncoder);
+        var service = new AdminService(repository, authenticationService);
         Executable action = () -> service.promote("username");
 
         assertThrows(UserNotFound.class, action);
@@ -110,9 +110,9 @@ class AdminServiceTest {
         Mockito.when(repository.findById("username"))
                 .thenReturn(Optional.of(user));
 
-        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        var authenticationService = Mockito.mock(AuthenticationService.class);
 
-        var service = new AdminService(repository, passwordEncoder);
+        var service = new AdminService(repository, authenticationService);
         service.demote("username");
 
         assertEquals(List.of(ROLE_USER), user.getRoles());
@@ -125,9 +125,9 @@ class AdminServiceTest {
         Mockito.when(repository.findById("username"))
                 .thenReturn(Optional.empty());
 
-        var passwordEncoder = Mockito.mock(PasswordEncoder.class);
+        var authenticationService = Mockito.mock(AuthenticationService.class);
 
-        var service = new AdminService(repository, passwordEncoder);
+        var service = new AdminService(repository, authenticationService);
         Executable action = () -> service.demote("username");
 
         assertThrows(UserNotFound.class, action);

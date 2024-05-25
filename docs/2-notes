@@ -10,7 +10,7 @@ Pom dependencies niet up to date *geupdate*
 Ongebruikte imports op plekken.
 Inlog check wachtwoord via equals methode*gefixt door PasswordEncoder matcher*
 geen salting van wachtwoord*PasswordEncoder BCrypt gebruikt salting*
-geen peppering van wachtwoord
+geen peppering van wachtwoord*
 application.properties bevat inlogdata voor database en meer
 JWT secret basic
 vaak this.secret = secret inplaats van alleen uit property file halen

@@ -10,4 +10,5 @@ In fakedatagenerator index.js de hashing algorithm van md5 naar sha256 veranderd
 Bij het promoten/demoten van en naar admin wordt er nu gebruik gemaakt van een dto requestbody voor username doorgeven inplaats van via url
 Snyk ignore file gemaakt voor h2 database vulnerability met redenering erin
 Added @Secured bij controller methods met passende rollen
-
+Pepper toegevoegd
+AdminService gebruikt nu het registreer functie van AuthenticationService
