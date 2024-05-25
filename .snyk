@@ -1,0 +1,10 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JAVA-COMH2DATABASE-31685:
+    - '*':
+        reason: vulnerability only a problem if default webAllowOthers=false gets overwritten to true.
+        expires: 2024-06-24T13:03:29.384Z
+        created: 2024-05-25T13:03:29.389Z
+patch: {}
