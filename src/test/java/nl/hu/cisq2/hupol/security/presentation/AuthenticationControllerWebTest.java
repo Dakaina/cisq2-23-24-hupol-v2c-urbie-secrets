@@ -94,8 +94,9 @@ public class AuthenticationControllerWebTest {
         String authHeader = loginResult.getResponse().getHeader("Authorization");
 
         // Then we can promote the user to an admin
-        var promotion = post("/auth/admin/testuser")
+        var promotion = post("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
                 .andExpect(status().isOk());
@@ -128,8 +129,9 @@ public class AuthenticationControllerWebTest {
         String authHeader = loginResult.getResponse().getHeader("Authorization");
 
         // Then we cannot promote an unknown user to an admin
-        var promotion = post("/auth/admin/testuser")
+        var promotion = post("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
                 .andExpect(status().isNotFound());
@@ -154,8 +156,9 @@ public class AuthenticationControllerWebTest {
         String authHeader = loginResult.getResponse().getHeader("Authorization");
 
         // Then we can demote the admin
-        var promotion = delete("/auth/admin/testuser")
+        var promotion = delete("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
                 .andExpect(status().isOk());
@@ -188,8 +191,9 @@ public class AuthenticationControllerWebTest {
         String authHeader = loginResult.getResponse().getHeader("Authorization");
 
         // Then we cannot demote user to an admin
-        var promotion = delete("/auth/admin/testuser")
+        var promotion = delete("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
                 .andExpect(status().isNotFound());

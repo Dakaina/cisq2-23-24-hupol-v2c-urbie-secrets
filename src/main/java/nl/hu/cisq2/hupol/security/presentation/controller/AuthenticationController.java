@@ -5,6 +5,7 @@ import nl.hu.cisq2.hupol.security.application.AuthenticationService;
 import nl.hu.cisq2.hupol.security.domain.UserProfile;
 import nl.hu.cisq2.hupol.security.domain.exception.UserAlreadyExists;
 import nl.hu.cisq2.hupol.security.domain.exception.UserNotFound;
+import nl.hu.cisq2.hupol.security.presentation.dto.AdminRequest;
 import nl.hu.cisq2.hupol.security.presentation.dto.RegisterRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -31,19 +32,19 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping("admin/{username}")
-    public void promoteAdmin(@PathVariable String username) {
+    @PostMapping("admin")
+    public void promoteAdmin(@Validated @RequestBody AdminRequest credential) {
         try {
-            this.adminService.promote(username);
+            this.adminService.promote(credential.username);
         } catch (UserNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("admin/{username}")
-    public void demoteAdmin(@PathVariable String username) {
+    @DeleteMapping("admin")
+    public void demoteAdmin(@Validated @RequestBody AdminRequest credential) {
         try {
-            this.adminService.demote(username);
+            this.adminService.demote(credential.username);
         } catch (UserNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

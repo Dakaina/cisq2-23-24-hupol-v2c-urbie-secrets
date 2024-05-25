@@ -7,3 +7,5 @@ Bij het aanmaken van accounts wordt er gebruik gemaakt van PasswordEncoder voor 
 Bij het inloggen wordt er inplaats van .equals methode nu gemaakt van PasswordsEncoder's matcher functie
 Bij het registreren van een user wordt er gebruik gemaakt van @Size en @Pattern regex die requirements checkt bij input dto
 In fakedatagenerator index.js de hashing algorithm van md5 naar sha256 veranderd
+Bij het promoten/demoten van en naar admin wordt er nu gebruik gemaakt van een dto requestbody voor username doorgeven inplaats van via url
+

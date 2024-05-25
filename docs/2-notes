@@ -1,13 +1,11 @@
 Wat vinden wij:
 User's password is being saved as plain text* encoded en salted nu*
 No role based authorization checks at any controller method (so you can promote users to admins and the other way around while being a user)
-Bij promoten/demoten van/naar admin wordt username doorgegeven via url inplaats van parameter
-Alle soort input kan doorkomen, er is geen whitelist en validation.
+Bij promoten/demoten van/naar admin wordt username doorgegeven via url inplaats van parameter*via requestbod nuy*
 Er is alleen 1 factor authentication
-JWT token timeout duurt te lang, jwt token is nu 10 dagen geldig, refreshing jwt token misschien?
+JWT token timeout duurt te lang, jwt token is nu 10 dagen geldig
 Alle type wachtwoorden worden toegelaten (zwakke, bekende, te weinig characters)*er is nu een requirement checker*
 Verdachte login pogingen/belangrijke transacties worden niet gelogd
-XML bestand voor import candidates/votes kan misbruikt worden wegens accepteren van untrusted xml files
 Pom dependencies niet up to date *geupdate*
 Geen entity java objecten sturen maar dto's
 Ongebruikte dependencies op plekken.
