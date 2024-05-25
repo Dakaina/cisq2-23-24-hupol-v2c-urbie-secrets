@@ -30,7 +30,7 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 public class SecurityConfig {
     private final static String LOGIN_PATH = "/auth/login";
     private final static String REGISTER_PATH = "/auth/register";
-    private final static String ADMIN_PATH = "/admin";
+    private final static String ADMIN_PATH = "/auth/admin";
 
     @Value("${security.jwt.secret}")
     private String jwtSecret;
