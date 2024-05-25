@@ -1,6 +1,6 @@
 Wat vinden wij:
 User's password is being saved as plain text* encoded en salted nu*
-No role based authorization checks at any controller method (so you can promote users to admins and the other way around while being a user)
+No role based authorization checks at any controller method (so you can promote users to admins an the other way around while bdeing a user) *
 Bij promoten/demoten van/naar admin wordt username doorgegeven via url inplaats van parameter*via requestbod nuy*
 Er is alleen 1 factor authentication
 JWT token timeout duurt te lang, jwt token is nu 10 dagen geldig
@@ -17,7 +17,7 @@ JWT secret basic
 vaak this.secret = secret inplaats van alleen uit property file halen
 er wordt geregistreerd op 2 punten (verschillend admin en user)
 Hardcoded credentials zijn te makkelijk te raden
-
+geen uitloggen?
 
 Wat vind snyk:
 Update org.springframework.boot:spring-boot-starter-web van 3.2.3 naar 3.2.5 *

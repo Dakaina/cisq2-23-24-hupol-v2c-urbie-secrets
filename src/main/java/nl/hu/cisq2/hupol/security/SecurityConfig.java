@@ -30,6 +30,7 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 public class SecurityConfig {
     private final static String LOGIN_PATH = "/auth/login";
     private final static String REGISTER_PATH = "/auth/register";
+    private final static String ADMIN_PATH = "/admin";
 
     @Value("${security.jwt.secret}")
     private String jwtSecret;
@@ -53,6 +54,7 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher(POST, REGISTER_PATH)).permitAll()
                         .requestMatchers(antMatcher(POST, LOGIN_PATH)).permitAll()
                         .requestMatchers(antMatcher("/error")).anonymous()
+                        .requestMatchers(antMatcher(POST, ADMIN_PATH)).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(
