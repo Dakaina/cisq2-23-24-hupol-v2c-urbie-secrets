@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -30,6 +31,7 @@ class controllerIntegrationTest {
     private controller voteController;
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"ADMIN"})
     @DisplayName("import a list of votes")
     void importList() {
         // Given a multipart-file containing a list of votes we want to import
@@ -54,6 +56,7 @@ class controllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"ADMIN"})
     @DisplayName("don't accept incorrectly formatted dates")
     void incorrectlyFormattedDate() {
         // Given a multipart-file containing a badly formatted date
@@ -71,6 +74,7 @@ class controllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"ADMIN"})
     @DisplayName("don't accept incorrectly formatted election id")
     void incorrectlyFormattedElectionId() {
         // Given a multipart-file containing a badly formatted id
@@ -88,6 +92,7 @@ class controllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"ADMIN"})
     @DisplayName("don't accept incorrectly formatted voter id")
     void incorrectlyFormattedVoterId() {
         // Given a multipart-file containing a badly formatted id
@@ -105,6 +110,7 @@ class controllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"ADMIN"})
     @DisplayName("don't accept empty file")
     void emptyFile() {
         // Given an empty file
@@ -122,6 +128,7 @@ class controllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"ADMIN"})
     @DisplayName("read error is converted correctly")
     void ioError() throws IOException {
         // Given a multipart-file that has a read error
