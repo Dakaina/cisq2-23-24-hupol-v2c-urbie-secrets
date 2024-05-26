@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import static nl.hu.cisq2.hupol.security.domain.Role.ROLE_ADMIN;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -45,6 +46,7 @@ public class AuthenticationControllerWebTest {
 
         var request = post("/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content(jsonBody);
 
         mockMvc.perform(request)
@@ -60,6 +62,7 @@ public class AuthenticationControllerWebTest {
 
         var request = post("/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content(jsonBody);
 
         mockMvc.perform(request)
@@ -80,6 +83,7 @@ public class AuthenticationControllerWebTest {
         String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content(loginBody);
         MvcResult loginResult = mockMvc.perform(login)
                 .andExpect(status().isOk())
@@ -90,6 +94,7 @@ public class AuthenticationControllerWebTest {
         // Then we can promote the user to an admin
         var promotion = post("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
@@ -115,6 +120,7 @@ public class AuthenticationControllerWebTest {
         String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content(loginBody);
         MvcResult loginResult = mockMvc.perform(login)
                 .andExpect(status().isOk())
@@ -125,6 +131,7 @@ public class AuthenticationControllerWebTest {
         // Then we cannot promote an unknown user to an admin
         var promotion = post("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
@@ -142,6 +149,7 @@ public class AuthenticationControllerWebTest {
         String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content(loginBody);
         MvcResult loginResult = mockMvc.perform(login)
                 .andExpect(status().isOk())
@@ -152,6 +160,7 @@ public class AuthenticationControllerWebTest {
         // Then we can demote the admin
         var promotion = delete("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
@@ -177,6 +186,7 @@ public class AuthenticationControllerWebTest {
         String loginBody = "{\"username\": \"admin\", \"password\": \"ABcd12!@admin\"}";
         var login = post("/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content(loginBody);
         MvcResult loginResult = mockMvc.perform(login)
                 .andExpect(status().isOk())
@@ -187,6 +197,7 @@ public class AuthenticationControllerWebTest {
         // Then we cannot demote user to an admin
         var promotion = delete("/auth/admin")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
                 .content("{\"username\": \"testuser\"}")
                 .header("Authorization", authHeader);
         mockMvc.perform(promotion)
