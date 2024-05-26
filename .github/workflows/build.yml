@@ -28,5 +28,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+    # replacing placeholder secrets with the actual ones from github secrets :) (please work)
+      - name: Inject secrets into secrets.properties
+        run: |
+          sed -i 's|^snyk=.*|snyk=${{ secrets.snyk }}|' secrets.properties 
+          
       - name: Build with Maven
         run: ./mvnw -B verify -Dspring.profiles.active=ci
