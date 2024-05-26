@@ -91,19 +91,17 @@ class AuthenticationServiceTest {
     @Test
     @DisplayName("user can register an account")
     void registration() {
-        String username = "username";
-        String password = "ABcd12!@admin";
         List<Role> roles = List.of(Role.ROLE_USER);
-        var user = new User(username, password, roles);
+        var user = new User("username", "ABcd12!@admin", roles);
 
         var repository = Mockito.mock(UserRepository.class);
-        Mockito.when(repository.existsById(username))
+        Mockito.when(repository.existsById("username"))
                 .thenReturn(false);
 
         var passwordEncoder = Mockito.mock(PasswordEncoder.class);
 
         var service = new AuthenticationService(repository, passwordEncoder);
-        service.register(username, password);
+        service.register("username", "ABcd12!@admin");
 
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
         Mockito.verify(repository).save(userCaptor.capture());

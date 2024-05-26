@@ -41,10 +41,7 @@ public class AuthenticationControllerWebTest {
     @Test
     @DisplayName("register")
     public void register() throws Exception {
-        String username = "testuser";
-        String password = "ABcd12!@admin";
-
-        String jsonBody = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password);
+        String jsonBody = "{\"username\": \"testuser\", \"password\": \"ABcd12!@admin\"}";
 
         var request = post("/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -52,17 +49,14 @@ public class AuthenticationControllerWebTest {
 
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.username").value(username))
+                .andExpect(jsonPath("$.username").value("testuser"))
                 .andExpect(jsonPath("$.authorities[0].authority").value("ROLE_USER"));
     }
 
     @Test
     @DisplayName("cannot register if user exists")
     public void cannotRegister() throws Exception {
-        String username = "testuser";
-        String password = "ABcd12!@admin";
-
-        String jsonBody = String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password);
+        String jsonBody = "{\"username\": \"testuser\", \"password\": \"ABcd12!@admin\"}";
 
         var request = post("/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)

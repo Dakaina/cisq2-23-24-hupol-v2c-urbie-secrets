@@ -5,10 +5,19 @@ services:
     ports:
       - "15432:5432"
     environment:
-      - "POSTGRES_USER=admin"
-      - "POSTGRES_PASSWORD=admin"
-      - "DB_APP_NAME=cisq2-hupol"
-      - "DB_APP_USER=cisq2-hupol"
-      - "DB_APP_PASS=cisq2-hupol"
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: /run/secrets/secret_pg_pass
+      DB_APP_NAME: cisq2-hupol
+      DB_APP_USER: cisq2-hupol
+      DB_APP_PASS: /run/secrets/secret_db_pass
     volumes:
       - "./development/data:/var/data/db"
+    secrets:
+      - secret_pg_pass
+      - secret_db_pass
+
+secrets:
+  secret_pg_pass:
+    file: docker_pg_pass.txt
+  secret_db_pass:
+    file: docker_db_pass.txt
